@@ -5,3 +5,78 @@ input.form-control {
 body {
     padding-top: 36px;
 }
+
+
+.navbar{
+    background-color: #337ab7;
+}
+
+.navbar-default .navbar-brand{
+    color: white;
+}
+
+.grey-nav {
+    color: #777;
+}
+
+.blue-nav {
+    color: #337ab7;
+}
+
+
+.navbar-default .navbar-link {
+    color: white;
+}
+
+.list-group-item {
+    border-width: 0px 0;
+}
+
+.navbar>a>span {
+    color: white;
+}
+
+.list-group {
+    padding-top: 20px;
+}
+
+.wbdv-left-pane {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-top: 15px;
+    overflow: auto;
+    border-right: solid rgba(0,0,0,0.49);
+}
+.wbdv-right-pane {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    padding-top: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    overflow-y: auto;
+}
+
+.jga-toolbar {
+    position: absolute;
+    right: 15px;
+    background-color: white;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    border-bottom-left-radius: 5px;
+    opacity: 0.7;
+}
+
+.newNAme{
+    padding-top: 30px;
+}
+
+.bottom-padding{
+    padding-bottom: 50px;
+}
