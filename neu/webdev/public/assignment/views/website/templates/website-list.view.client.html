@@ -21,42 +21,17 @@
 
 <div class="container-fluid">
     <ul class="list-group">
+      <div ng-repeat="website in model.websites">
         <li class="list-group-item">
             <a href="../views/page/page-list.view.client.html">
-                Address Book App
+                {{website}}
             </a>
             <a href="website-edit.view.client.html" class="pull-right">
               <span class="glyphicon glyphicon-cog">
               </span>
             </a>
         </li>
-        <li class="list-group-item">
-            <a href="../views/page/page-list.view.client.html">
-                Blogger
-            </a>
-            <a href="website-edit.view.client.html" class="pull-right">
-              <span class="glyphicon glyphicon-cog">
-              </span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="../views/page/page-list.view.client.html">
-                Blogging App
-            </a>
-            <a href="website-edit.view.client.html" class="pull-right">
-              <span class="glyphicon glyphicon-cog">
-              </span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="../views/page/page-list.view.client.html">
-                Script Testing App
-            </a>
-            <a href="website-edit.view.client.html" class="pull-right">
-              <span class="glyphicon glyphicon-cog">
-              </span>
-            </a>
-        </li>
+      </div>
     </ul>
 </div>
 

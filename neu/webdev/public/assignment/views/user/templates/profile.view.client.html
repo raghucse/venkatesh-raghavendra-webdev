@@ -14,7 +14,12 @@
 
 
     <div class="container newNAme">
-
+        <div class="alert alert-danger" ng-show="model.error">
+            {{model.error}}
+        </div>
+        <div class="alert alert-success" ng-show="model.message">
+            {{model.message}}
+        </div>
         <form>
             <div class="form-group">
                 <label for="username">Username</label>
@@ -28,21 +33,24 @@
             </div>
             <div class="form-group">
                 <label for="first-name">First Name</label>
-                <input ng-model="model.user.first-name"
+                <input ng-model="model.user.firstName"
                        type="text" class="form-control" id="first-name" placeholder="Alice" value="Raghavendra">
             </div>
             <div class="form-group">
                 <label for="last-name">Last Name</label>
-                <input  ng-model="model.user.last-name"
+                <input  ng-model="model.user.lastName"
                         type="text" class="form-control" id="last-name" placeholder="Wonderland" value="Venkatesh">
             </div>
         </form>
 
+        <button class="btn btn-success btn-block"
+           ng-click="model.update()">Update</button>
+
         <a class="btn btn-primary btn-block"
-           href="../website/website-list.view.client.html">Websites</a>
+           href="#/{{model.userId}}/website">Websites</a>
 
         <a class="btn btn-danger  btn-block"
-           href="login.view.client.html">Logout</a>
+           href="#/login">Logout</a>
         <div class="bottom-padding"></div>
     </div>
 

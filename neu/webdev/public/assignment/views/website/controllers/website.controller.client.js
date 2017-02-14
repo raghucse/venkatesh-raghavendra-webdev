@@ -10,6 +10,11 @@
 
     function WebsiteListController() {
         var vm = this;
+        vm.userId = $routeParams["uid"];
+        function init() {
+            vm.websites = WebsiteService.findWebsitesByUser(userId);
+        }
+        init();
     }
 
     function NewWebsiteController() {

@@ -4,22 +4,28 @@
 (function(){
     angular
         .module("WebAppMaker")
-        .config(configuration);
+        .config(configuration)
+        .config(['$locationProvider', function($locationProvider) {
+            $locationProvider.hashPrefix('');
+        }]);
 
     function configuration($routeProvider, $locationProvider) {
         $routeProvider
             .when("/login", {
-                templateUrl: "/views/user/login.view.client.html",
+                templateUrl: "views/user/templates/login.view.client.html",
+                controller: "LoginController",
+                controllerAs: "model"
+            })
+            .when("/", {
+                templateUrl: "views/user/templates/login.view.client.html",
                 controller: "LoginController",
                 controllerAs: "model"
             })
             .when("/register", {
-                templateUrl: "/views/user/register.view.client.html",
-                controller: "RegisterController",
-                controllerAs: "model"
+                templateUrl: "views/user/templates/register.view.client.html"
             })
             .when("/user/:uid", {
-                templateUrl: "/views/user/profile.view.client.html",
+                templateUrl: "views/user/templates/profile.view.client.html",
                 controller: "ProfileController",
                 controllerAs: "model"
             })
@@ -68,9 +74,5 @@
                 controller: "EditWidgetController",
                 controllerAs: "model"
             })
-
-            otherwise({
-            redirectTo: '/views/user/login.view.client.html'
-        });
     }
 })();

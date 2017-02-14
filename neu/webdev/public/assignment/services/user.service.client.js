@@ -18,7 +18,7 @@
             "findUserById": findUserById,
             "findUserByUsername": findUserByUsername,
             "findUserByCredentials": findUserByCredentials,
-            "updateUser": updateUser,
+            "updateUser": fupdateUser,
             "deleteUser": deleteUser
         };
         return api;
@@ -30,7 +30,7 @@
         function findUserById(userId) {
             for (var i = 0; i < users.length; i++) {
                 if (users[i]._id === userId) {
-                    return users[i];
+                    return angular.copy(users[i]);
                 }
             }
             return null;
@@ -57,9 +57,11 @@
         function fupdateUser(userId, user) {
             for (var i = 0; i < users.length; i++) {
                 if (users[i]._id === userId) {
-                    users[i] = user;
+                    users[i] = angular.copy(user);
+                    return angular.copy(users[i]);
                 }
             }
+            return null;
         }
 
         function deleteUser(userId) {
