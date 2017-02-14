@@ -23,7 +23,7 @@
     <ul class="list-group">
       <div ng-repeat="website in model.websites">
         <li class="list-group-item">
-            <a href="../views/page/page-list.view.client.html">
+            <a href="#/user/{{model.userId}}/website/{{website._id}}/page">
                 {{website.name}}
             </a>
             <a href="#/user/{{model.userId}}/website/{{website._id}}" class="pull-right">

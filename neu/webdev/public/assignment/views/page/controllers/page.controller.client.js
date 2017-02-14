@@ -10,8 +10,14 @@
          app.controller("NewPageController", NewPageController);
          app.controller("EditPageController", EditPageController);
 
-        function PageListController() {
+        function PageListController($routeParams, PageService) {
             var vm = this;
+            vm.websiteId = $routeParams["wid"];
+            vm.userId = $routeParams["uid"];
+            function init() {
+                vm.pages = PageService.findPagesByWebsiteId(vm.websiteId);
+            }
+            init();
         }
 
         function NewPageController() {

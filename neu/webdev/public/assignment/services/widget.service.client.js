@@ -38,13 +38,15 @@
         }
 
         function findWidgetsByPageId(pageId) {
+            var allWidgets = [];
             for (var i = 0; i < widgets.length; i++) {
                 if (widgets[i].pageId === pageId) {
-                    return widgets[i];
+                    allWidgets.push(angular.copy(widgets[i]));
                 }
             }
-            return null;
+            return allWidgets;
         }
+
 
         function findWidgetById(widgetId) {
             for (var i = 0; i < widgets.length; i++) {

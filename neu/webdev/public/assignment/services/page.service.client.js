@@ -19,7 +19,7 @@
 
         var api = {
             "createPage": createPage,
-            "findPageByWebsiteId": findPageByWebsiteId,
+            "findPagesByWebsiteId": findPagesByWebsiteId,
             "findPageById": findPageById,
             "updatePage": updatePage,
             "deletePage": deletePage,
@@ -31,13 +31,14 @@
             pages.push(page);
         }
 
-        function findPageByWebsiteId(websiteId) {
+        function findPagesByWebsiteId(websiteId) {
+            var allPages = [];
             for (var i = 0; i < pages.length; i++) {
-                if (pages[i].websiteId === websiteId) {
-                    return pages[i];
+                if (pages[i].websiteId == websiteId) {
+                    allPages.push(angular.copy(pages[i]));
                 }
             }
-            return null;
+            return allPages;
         }
 
         function findPageById(pageId) {

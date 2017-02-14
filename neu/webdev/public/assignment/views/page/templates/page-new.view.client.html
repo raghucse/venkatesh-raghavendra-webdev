@@ -19,9 +19,10 @@
             </div>
         </div>
 
+
         <div class="col-sm-8 hidden-xs">
             <a class="navbar-brand" href="#">
-                <label class="grey-nav">Edit Page</label>
+                <label class="grey-nav">New page</label>
             </a>
 
             <div class="navbar-text pull-right">
@@ -40,7 +41,7 @@
                 </a>
             </div>
             <a class="navbar-brand" href="#">
-                <label class="grey-nav">Edit Page</label>
+                <label class="grey-nav">New page</label>
             </a>
             <div class="navbar-text pull-right">
                 <a href="page-list.view.client.html" class="navbar-link">
@@ -52,12 +53,11 @@
     </div>
 </nav>
 
-
-<div class="row container-fluid">
+<div class="container-fluid row">
     <div class="col-sm-4 hidden-xs wbdv-left-pane">
         <ul class="list-group">
             <li class="list-group-item">
-                <a href="../widget/templates/widget-list.view.client.html">
+                <a href="../../widget/templates/widget-list.view.client.html">
                     Blog Post
                 </a>
                 <a href="page-edit.view.client.html" class="page-link pull-right">
@@ -66,7 +66,7 @@
                 </a>
             </li>
             <li class="list-group-item">
-                <a href="../widget/templates/widget-list.view.client.html">
+                <a href="../../widget/templates/widget-list.view.client.html">
                     Blogs
                 </a>
                 <a href="page-edit.view.client.html" class="page-link pull-right">
@@ -75,7 +75,7 @@
                 </a>
             </li>
             <li class="list-group-item">
-                <a href="../widget/templates/widget-list.view.client.html">
+                <a href="../../widget/templates/widget-list.view.client.html">
                     Home
                 </a>
                 <a href="page-edit.view.client.html" class="page-link pull-right">
@@ -84,7 +84,7 @@
                 </a>
             </li>
             <li class="list-group-item">
-                <a href="../widget/templates/widget-list.view.client.html">
+                <a href="../../widget/templates/widget-list.view.client.html">
                     About
                 </a>
                 <a href="page-edit.view.client.html" class="page-link pull-right">
@@ -93,7 +93,7 @@
                 </a>
             </li>
             <li class="list-group-item">
-                <a href="../widget/templates/widget-list.view.client.html">
+                <a href="../../widget/templates/widget-list.view.client.html">
                     Contact us
                 </a>
                 <a href="page-edit.view.client.html" class="page-link pull-right">
@@ -107,23 +107,21 @@
 
     <div class="col-sm-8 col-xs-12 wbdv-right-pane">
         <div class="newNAme form-group">
-            <label for="page-edit-web-name" class="form-control-label">Name</label>
+            <label for="page-new-web-name" class="form-control-label">Name</label>
             <input ng-model="model.page.name"
                    placeholder="Page Name"
-                   id="page-edit-web-name"
+                   id="page-new-web-name"
                    class="form-control"
-                   type="text"
-                   value="Blog Post">
+                   type="text">
         </div>
         <div class="form-group">
-            <label for="page-edit-web-title" class="form-control-label">Title</label>
+            <label for="page-new-web-description" class="form-control-label">Title</label>
             <input ng-model="model.widget.title"
                    placeholder="Page Title"
-                   id="page-edit-web-title"
+                   id="page-new-web-description"
                    class="form-control"
-                   type="text"></input>
+                   type="text">
         </div>
-        <a href="page-list.view.client.html" class="btn btn-danger form-control">Delete</a>
     </div>
 
 </div>

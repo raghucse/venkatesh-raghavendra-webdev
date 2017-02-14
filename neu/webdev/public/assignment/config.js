@@ -44,7 +44,7 @@
                 controller: "EditWebsiteController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid/page", {
+            .when("/user/:uid/website/:wid/page/", {
                 templateUrl: "views/page/templates/page-list.view.client.html",
                 controller: "PageListController",
                 controllerAs: "model"
