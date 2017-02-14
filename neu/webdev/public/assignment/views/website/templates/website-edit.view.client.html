@@ -55,42 +55,17 @@
 <div class="row container-fluid">
     <div class="col-sm-4 hidden-xs wbdv-left-pane">
         <ul class="list-group">
-            <li class="list-group-item">
-                <a href="../views/page/page-list.view.client.html">
-                    Address Book App
-                </a>
-                <a href="website-edit.view.client.html" class="pull-right">
+            <div ng-repeat="website in model.websites">
+                <li class="list-group-item">
+                    <a href="../views/page/page-list.view.client.html">
+                        {{website.name}}
+                    </a>
+                    <a href="#/user/{{model.userId}}/website/{{website._id}}" class="pull-right">
               <span class="glyphicon glyphicon-cog">
               </span>
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a href="../views/page/page-list.view.client.html">
-                    Blogger
-                </a>
-                <a href="website-edit.view.client.html" class="pull-right">
-              <span class="glyphicon glyphicon-cog">
-              </span>
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a href="../views/page/page-list.view.client.html">
-                    Blogging App
-                </a>
-                <a href="website-edit.view.client.html" class="pull-right">
-              <span class="glyphicon glyphicon-cog">
-              </span>
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a href="../views/page/page-list.view.client.html">
-                    Script Testing App
-                </a>
-                <a href="website-edit.view.client.html" class="pull-right">
-              <span class="glyphicon glyphicon-cog">
-              </span>
-                </a>
-            </li>
+                    </a>
+                </li>
+            </div>
         </ul>
     </div>
 
@@ -104,7 +79,7 @@
                 <label for="new-web-description" class="form-control-label">Website Description</label>
                 <textarea ng-model="model.website.description" placeholder="Website Description" id="new-web-description" class="form-control" rows="4" cols="100">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</textarea>
             </div>
-            <a href="website-list.view.client.html" class="btn btn-danger form-control">Delete</a>
+            <a ng-click="model.deleteWebsite()" class="btn btn-danger form-control">Delete</a>
         </div>
 
 </div>

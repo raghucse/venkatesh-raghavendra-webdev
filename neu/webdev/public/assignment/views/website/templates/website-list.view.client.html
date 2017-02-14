@@ -10,7 +10,7 @@
             <label>Websites</label>
         </a>
         <div class="navbar-text pull-right">
-            <a href="website-new.view.client.html" class="navbar-link">
+            <a href="#/user/{{model.userId}}/website/new" class="navbar-link">
                   <span class="glyphicon glyphicon-plus">
                   </span>
             </a>
@@ -26,7 +26,7 @@
             <a href="../views/page/page-list.view.client.html">
                 {{website.name}}
             </a>
-            <a href="website-edit.view.client.html" class="pull-right">
+            <a href="#/user/{{model.userId}}/website/{{website._id}}" class="pull-right">
               <span class="glyphicon glyphicon-cog">
               </span>
             </a>

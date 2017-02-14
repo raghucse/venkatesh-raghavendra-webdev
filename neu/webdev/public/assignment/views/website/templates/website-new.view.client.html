@@ -23,10 +23,10 @@
                 <label>New Website</label>
             </a>
             <div class="navbar-text pull-right">
-                <a href="website-list.view.client.html" class="navbar-link">
+                <div ng-click="model.createWebsite()" class="navbar-link">
                       <span class="glyphicon glyphicon-ok">
                       </span>
-                </a>
+                </div>
             </div>
         </div>
 
@@ -41,10 +41,10 @@
                 <label>New Website</label>
             </a>
             <div class="navbar-text pull-right">
-                <a href="website-list.view.client.html" class="navbar-link">
+                <div  ng-click="model.createWebsite()" class="navbar-link">
                       <span class="glyphicon glyphicon-ok">
                       </span>
-                </a>
+                </div>
             </div>
         </div>
     </div>
@@ -54,42 +54,17 @@
 <div class="row container-fluid">
     <div class="col-sm-4 hidden-xs wbdv-left-pane">
         <ul class="list-group">
-            <li class="list-group-item">
-                <a href="../views/page/page-list.view.client.html">
-                    Address Book App
-                </a>
-                <a href="website-edit.view.client.html" class="pull-right">
+            <div ng-repeat="website in model.websites">
+                <li class="list-group-item">
+                    <a href="../views/page/page-list.view.client.html">
+                        {{website.name}}
+                    </a>
+                    <a href="#/user/{{model.userId}}/website/{{website._id}}" class="pull-right">
               <span class="glyphicon glyphicon-cog">
               </span>
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a href="../views/page/page-list.view.client.html">
-                    Blogger
-                </a>
-                <a href="website-edit.view.client.html" class="pull-right">
-              <span class="glyphicon glyphicon-cog">
-              </span>
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a href="../views/page/page-list.view.client.html">
-                    Blogging App
-                </a>
-                <a href="website-edit.view.client.html" class="pull-right">
-              <span class="glyphicon glyphicon-cog">
-              </span>
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a href="../views/page/page-list.view.client.html">
-                    Script Testing App
-                </a>
-                <a href="../views/page/page-list.view.client.html" class="pull-right">
-              <span class="glyphicon glyphicon-cog">
-              </span>
-                </a>
-            </li>
+                    </a>
+                </li>
+            </div>
         </ul>
     </div>
 
@@ -104,7 +79,7 @@
       </div>
         <div class="form-group">
             <label for="new-web-description" class="form-control-label">Description</label>
-            <textarea ng-model="model.website.name"
+            <textarea ng-model="model.website.description"
                       id="new-web-description"
                       class="form-control"
                       rows="4"

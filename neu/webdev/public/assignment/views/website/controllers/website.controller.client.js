@@ -17,12 +17,44 @@
         init();
     }
 
-    function NewWebsiteController() {
+    function NewWebsiteController($routeParams, WebsiteService, $location) {
         var vm = this;
+        vm.userId = $routeParams["uid"];
+
+        vm.createWebsite = createWebsite;
+
+        function init() {
+            vm.websites = WebsiteService.findAllWebsitesForUser(vm.userId);
+        }
+        init();
+
+        function createWebsite() {
+            vm.website._id = (new Date()).getTime();
+            WebsiteService.createWebsite(vm.userId, vm.website);
+            $location.url("/user/"+vm.userId+"/website");
+        }
+
+
+
     }
 
-    function EditWebsiteController() {
+    function EditWebsiteController($routeParams, WebsiteService, $location) {
         var vm = this;
+        vm.userId = $routeParams["uid"];
+        vm.websiteId = $routeParams["wid"];
+
+        vm.deleteWebsite = deleteWebsite;
+
+        function init() {
+            vm.websites = WebsiteService.findAllWebsitesForUser(vm.userId);
+            vm.website = WebsiteService.findWebsiteById(vm.websiteId);
+        }
+        init();
+
+        function deleteWebsite() {
+            WebsiteService.deleteWebsite(vm.websiteId);
+            $location.url("/user/"+vm.userId+"/website");
+        }
     }
 
 
