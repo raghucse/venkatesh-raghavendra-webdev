@@ -8,11 +8,11 @@
     app.controller("NewWebsiteController", NewWebsiteController);
     app.controller("EditWebsiteController", EditWebsiteController);
 
-    function WebsiteListController() {
+    function WebsiteListController($routeParams, WebsiteService) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         function init() {
-            vm.websites = WebsiteService.findWebsitesByUser(userId);
+            vm.websites = WebsiteService.findAllWebsitesForUser(vm.userId);
         }
         init();
     }
