@@ -8,11 +8,12 @@
 
     function UserService() {
         var users = [
-            {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder"},
-            {_id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley"},
-            {_id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia"},
-            {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi"}
+            {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder", email: "opo@gmail.com"},
+            {_id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley", email: "ere@gmail.com"},
+            {_id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia", email: "abc@gmail.com"},
+            {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi", email: "xyz@gmail.com"}
         ];
+
         var api = {
             "createUser": createUser,
             "findUserById": findUserById,
@@ -24,7 +25,7 @@
         return api;
 
         function createUser(user) {
-            users.push(user);
+            users.push(angular.copy(user));
         }
 
         function findUserById(userId) {
@@ -57,7 +58,9 @@
         function fupdateUser(userId, user) {
             for (var i = 0; i < users.length; i++) {
                 if (users[i]._id === userId) {
-                    users[i] = angular.copy(user);
+                    users[i].firstName = user.firstName;
+                    users[i].lastName = user.lastName;
+                    users[i].email = user.email;
                     return angular.copy(users[i]);
                 }
             }

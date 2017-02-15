@@ -40,7 +40,7 @@
         function findWidgetsByPageId(pageId) {
             var allWidgets = [];
             for (var i = 0; i < widgets.length; i++) {
-                if (widgets[i].pageId === pageId) {
+                if (widgets[i].pageId == pageId) {
                     allWidgets.push(angular.copy(widgets[i]));
                 }
             }

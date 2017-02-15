@@ -20,92 +20,34 @@
 
 
 <div class="container-fluid">
-    <div ng-repeat="widget in model.widgets">
-        <div class="jga-toolbar">
-            <a href="widget-heading.view.client.html">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-
-    </div>
-</div>
-
-
-<div class="container-fluid">
-    <div>
-        <div class="jga-toolbar">
-            <a href="widget-heading.view.client.html">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-        <h1>GIZMODO</h1>
-    </div>
-
-    <div>
-        <div class="jga-toolbar">
-            <a href="widget-heading.view.client.html">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-        <h3>Congress Ends Spat, Agrees To Fund $1.1 Billion To Combat Zika</h3>
-    </div>
-    <div>
-        <div class="jga-toolbar">
-            <a href="widget-image.view.client.html">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-
-        <img width="100%" src="http://media.npr.org/assets/img/2016/09/28/mosquitos_wide-76ba2518aba3ad2877dd9c2479b764f0eaf8ab0e-s1600-c85.jpg">
-    </div>
-
-    <div>
-        <div class="jga-toolbar">
-            <a>
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-
-        <p>After nearly seven months of bickering and finger-pointing, Congress on Wednesday agreed to allocate $1.1 billion to help fight the spread and effects of the Zika virus.
-
-            The deal is part of a broader agreement to continue to fund the government after the fiscal year ends on Friday and the current budget expires.</p>
-        <div>
+    <div  ng-repeat="widget in model.widgets">
+       <div ng-switch="widget.widgetType">
             <div class="jga-toolbar">
                 <a href="widget-heading.view.client.html">
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
                 <span class="glyphicon glyphicon-align-justify"></span>
             </div>
-            <h3>White House To US Diplomats Against Travel Ban: 'Get With The Program Or Go'</h3>
-        </div>
 
-        <div>
-            <div class="jga-toolbar">
-                <a href="widget-youtube.view.client.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-                <span class="glyphicon glyphicon-align-justify"></span>
+            <div ng-switch-when="HEADER" ng-switch="widget.size">
+                <h1 ng-switch-when="1">{{widget.text}}</h1>
+                <h2 ng-switch-when="2">{{widget.text}}</h2>
+                <h3 ng-switch-when="3">{{widget.text}}</h3>
+                <h4 ng-switch-when="4">{{widget.text}}</h4>
+                <h5 ng-switch-when="5">{{widget.text}}</h5>
             </div>
-            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/SB35ikvGNgM" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div>
-            <div class="jga-toolbar">
-                <a>
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-                <span class="glyphicon glyphicon-align-justify"></span>
-            </div>
-            <p>The White House clashed Monday with a large group of American diplomats who are voicing dissent with Donald Trump's temporary travel ban on citizens from seven Muslim majority countries, challenging them to resign if they aren't on board.</p>
-        </div>
-
+           <div ng-switch-when="IMAGE">
+              <img ng-src="{{widget.url}}" width="{{widget.width}}">
+           </div>
+           <div ng-switch-when="YOUTUBE">
+               <iframe width="100%" height="100%"  ng-src="{{model.doYouTrust(widget.url)}}" frameborder="0" allowfullscreen></iframe>
+           </div>
+           <div ng-switch-when="HTML">
+               {{widget.text}}
+           </div>
+       </div>
     </div>
 </div>
-
 
 <div class="bottom-padding"></div>
 
