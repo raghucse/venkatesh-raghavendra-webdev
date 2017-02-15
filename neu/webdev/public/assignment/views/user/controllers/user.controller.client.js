@@ -54,7 +54,5 @@
             UserService.createUser(vm.user);
             $location.url('/user/' + vm.user._id);
         }
-
-
     }
 })();
