@@ -1,0 +1,52 @@
+<nav class="navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-text pull-left">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="white_navbar navbar-link">
+                  <span class="grey-nav glyphicon glyphicon-chevron-left">
+                  </span>
+            </a>
+        </div>
+        <a class="navbar-brand" href="">
+            <label class="grey-nav">Widget Edit</label>
+        </a>
+        <div class="navbar-text pull-right">
+            <a ng-click="model.updateWid(model.widget) class="navbar-link">
+                  <span class="grey-nav glyphicon glyphicon-ok">
+                  </span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="newNAme form-group">
+        <label for="widget-image-name" class="form-control-label">Name</label>
+        <input id="widget-image-name" class="form-control" type="text">
+    </div>
+    <div class="form-group">
+        <label for="widget-image-text" class="form-control-label">Text</label>
+        <input id="widget-image-text" class="form-control" type="text"></input>
+    </div>
+    <div class="form-group">
+        <label for="widget-image-url" class="form-control-label">URL</label>
+        <input ng-model="model.widget.url" id="widget-image-url" class="form-control" type="text" value="https://www.youtube.com/embed/SB35ikvGNgM">
+    </div>
+    <div class="form-group">
+        <label for="widget-image-width" class="form-control-label">Width</label>
+        <input ng-model="model.widget.width" id="widget-image-width" class="form-control" type="text"></input>
+    </div>
+
+    <div class="bottom-padding">
+        <a href="../widget-list.view.client.html" class=" btn btn-danger form-control">Delete</a>
+    </div>
+</div>
+
+<nav class="navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/user/{{model.userId}}" class="navbar-link">
+                <span class="blue-nav glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>

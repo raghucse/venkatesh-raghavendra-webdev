@@ -19,33 +19,15 @@
 </nav>
 
 
+
+
+
 <div class="container-fluid">
     <div  ng-repeat="widget in model.widgets">
        <div ng-switch="widget.widgetType">
-            <div class="jga-toolbar">
-                <a href="widget-heading.view.client.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-                <span class="glyphicon glyphicon-align-justify"></span>
-            </div>
+           <div class="container-fluid" ng-include="model.getWidgetTemplateUrl(widget.widgetType)">
 
-            <div ng-switch-when="HEADER" ng-switch="widget.size">
-                <h1 ng-switch-when="1">{{widget.text}}</h1>
-                <h2 ng-switch-when="2">{{widget.text}}</h2>
-                <h3 ng-switch-when="3">{{widget.text}}</h3>
-                <h4 ng-switch-when="4">{{widget.text}}</h4>
-                <h5 ng-switch-when="5">{{widget.text}}</h5>
-            </div>
-           <div ng-switch-when="IMAGE">
-              <img ng-src="{{widget.url}}" width="{{widget.width}}">
            </div>
-           <div ng-switch-when="YOUTUBE">
-               <iframe width="100%" height="100%"  ng-src="{{model.doYouTrust(widget.url)}}" frameborder="0" allowfullscreen></iframe>
-           </div>
-           <div ng-switch-when="HTML">
-               {{widget.text}}
-           </div>
-       </div>
     </div>
 </div>
 

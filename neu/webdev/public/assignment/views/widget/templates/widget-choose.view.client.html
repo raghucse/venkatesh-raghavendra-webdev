@@ -1,53 +1,57 @@
 <nav class="navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-text pull-left">
-            <a href="widget-list.view.client.html" class="white_navbar navbar-link">
+            <a href="#/user/{{model.userID}}/website/{{model.websiteID}}/page/{{model.pageID}}/widget" class="white_navbar navbar-link">
                   <span class="grey-nav glyphicon glyphicon-chevron-left">
                   </span>
             </a>
         </div>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand">
             <label class="grey-nav">Choose Widget</label>
         </a>
     </div>
 </nav>
-<div class="container-fluid bottom-padding">
+
+<div class="container-fluid">
     <ul class="list-group">
         <li class="list-group-item">
-            <a href="widget-heading.view.client.html">Header</a>
+            <a ng-click="model.newHeaderWidget()" href="">Header</a>
         </li>
         <li class="list-group-item">
-            <a href="#">Lable</a>
+            <a>Label</a>
         </li>
         <li class="list-group-item">
-            <a href="#">HTML</a>
+            <a>HTML</a>
         </li>
         <li class="list-group-item">
-            <a href="#">Text Input</a>
+            <a>Text Input</a>
         </li>
         <li class="list-group-item">
-            <a href="#">Link</a>
+            <a>Link</a>
         </li>
         <li class="list-group-item">
-            <a href="#">Button</a>
+            <a>Button</a>
         </li>
         <li class="list-group-item">
-            <a href="widget-image.view.client.html">Image</a>
+            <a ng-click="model.newImageWidget()" href="">Image</a>
         </li>
         <li class="list-group-item">
-            <a href="widget-youtube.view.client.html">YouTube</a>
+            <a ng-click="model.newYouTubeWidget()" href="">YouTube</a>
         </li>
         <li class="list-group-item">
-            <a href="#">Repeater</a>
+            <a>Data Table</a>
         </li>
-
+        <li class="list-group-item">
+            <a>Repeater</a>
+        </li>
     </ul>
 </div>
+
 
 <nav class="navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-text pull-right">
-            <a href="../views/user/profile.view.client.html" class="navbar-link">
+            <a href="#/user/{{model.userID}}" class="navbar-link">
                 <span class="blue-nav glyphicon glyphicon-user"></span>
             </a>
         </div>

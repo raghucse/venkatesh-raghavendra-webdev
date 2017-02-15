@@ -1,16 +1,16 @@
 <nav class="navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-text pull-left">
-            <a href="widget-list.view.client.html" class="white_navbar navbar-link">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="white_navbar navbar-link">
                   <span class="grey-nav glyphicon glyphicon-chevron-left">
                   </span>
             </a>
         </div>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand">
             <label class="grey-nav">Widget Edit</label>
         </a>
         <div class="navbar-text pull-right">
-            <a href="widget-list.view.client.html" class="navbar-link">
+            <a ng-click="model.updateWid(model.widget)" class="navbar-link">
                   <span class="grey-nav glyphicon glyphicon-ok">
                   </span>
             </a>
@@ -42,13 +42,13 @@
                type="text"
                value="3">
     </div>
-    <a href="widget-list.view.client.html" class="btn btn-danger form-control">Delete</a>
+    <a ng-click="model.deleteWidget()" class="btn btn-danger form-control">Delete</a>
 </div>
 
 <nav class="navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-text pull-right">
-            <a href="../views/user/profile.view.client.html" class="navbar-link">
+            <a href="#/user/{{model.userId}}" class="navbar-link">
                 <span class="blue-nav glyphicon glyphicon-user"></span>
             </a>
         </div>
