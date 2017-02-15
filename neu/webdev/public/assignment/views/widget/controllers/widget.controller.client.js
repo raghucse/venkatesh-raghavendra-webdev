@@ -56,28 +56,28 @@
         init();
 
         function newHeaderWidget() {
-            var headerWidget ={"widgetType": "HEADER", "size": 2, "text": "GIZMODO"};
+            var headerWidget ={"widgetType": "HEADER", "size": 2, "text": "New Header"};
             headerWidget._id = (new Date()).getTime();
             WidgetService.createWidget(vm.pageId, headerWidget);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+headerWidget._id);
 
         }
 
         function newImageWidget() {
             var imageWidget = {"widgetType": "IMAGE", "width": "100%",
-                "url": "http://lorempixel.com/400/200/"};
+                "url": "New Image URL"};
             imageWidget._id = (new Date()).getTime();;
             WidgetService.createWidget(vm.pageId, imageWidget);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+imageWidget._id);
 
         }
 
         function newYouTubeWidget() {
             var youTubeWidget ={"widgetType": "YOUTUBE", "width": "100%",
-                "url": "https://youtu.be/AM2Ivdi9c4E" };
+                "url": "New Youtube URL" };
             youTubeWidget._id = (new Date()).getTime();
             WidgetService.createWidget(vm.pageId, youTubeWidget);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+youTubeWidget._id);
         }
     }
 
