@@ -30,7 +30,7 @@
 
         function findUserById(userId) {
             for (var i = 0; i < users.length; i++) {
-                if (users[i]._id === userId) {
+                if (users[i]._id == userId) {
                     return angular.copy(users[i]);
                 }
             }
@@ -39,7 +39,7 @@
 
         function findUserByUsername(username) {
             for (var i = 0; i < users.length; i++) {
-                if (users[i].username === username) {
+                if (users[i].username == username) {
                     return users[i];
                 }
             }
@@ -57,7 +57,7 @@
 
         function fupdateUser(userId, user) {
             for (var i = 0; i < users.length; i++) {
-                if (users[i]._id === userId) {
+                if (users[i]._id == userId) {
                     users[i].firstName = user.firstName;
                     users[i].lastName = user.lastName;
                     users[i].email = user.email;

@@ -8,6 +8,7 @@
         .module("WebAppMaker");
     app.controller("LoginController", LoginController);
     app.controller("ProfileController", ProfileController);
+    app.controller("RegisterController", RegisterController);
 
     function ProfileController($routeParams, UserService) {
         var vm = this;
@@ -20,7 +21,7 @@
         init();
 
         function update() {
-            vm.user = UserService.updateUser(vm.userId, vm.user)
+            vm.user = UserService.updateUser(vm.userId, vm.user);
             if(vm.user == null){
                 vm.error = "Unable to update user";
             }{
@@ -44,5 +45,16 @@
         }
     }
 
+    function RegisterController(UserService, $location) {
+        var vm = this;
+        vm.register = register;
 
+        function register() {
+            vm.user._id = (new Date()).getTime();
+            UserService.createUser(vm.user);
+            $location.url('/user/' + vm.user._id);
+        }
+
+
+    }
 })();

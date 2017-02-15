@@ -43,7 +43,7 @@
 
         function findPageById(pageId) {
             for (var i = 0; i < pages.length; i++) {
-                if (pages[i]._id === pageId) {
+                if (pages[i]._id == pageId) {
                     return pages[i];
                 }
             }
@@ -52,7 +52,7 @@
 
         function updatePage(pageId, page) {
             for (var i = 0; i < pages.length; i++) {
-                if (pages[i]._id === pageId) {
+                if (pages[i]._id == pageId) {
                     pages[i] = page;
                 }
             }
@@ -60,7 +60,7 @@
 
         function deletePage(pageId) {
             for (var i = 0; i < pages.length; i++) {
-                if (pages[i]._id === pageId) {
+                if (pages[i]._id == pageId) {
                     pages.remove(i);
                 }
             }
