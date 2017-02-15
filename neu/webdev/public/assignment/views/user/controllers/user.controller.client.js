@@ -35,6 +35,10 @@
         var vm = this;
         vm.login = login;
 
+        function init() {
+        }
+        init();
+
         function login(user) {
             user = UserService.findUserByCredentials(user.username, user.password);
             if(user != null) {
@@ -48,6 +52,10 @@
     function RegisterController(UserService, $location) {
         var vm = this;
         vm.register = register;
+
+        function init() {
+        }
+        init();
 
         function register() {
             vm.user._id = (new Date()).getTime();
