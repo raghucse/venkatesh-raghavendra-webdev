@@ -80,6 +80,12 @@ body {
     padding-bottom: 60px;
 }
 
+
+.top-padding{
+    padding-bottom: 30px;
+}
+
+
 a:hover {
     text-decoration: none;
 }

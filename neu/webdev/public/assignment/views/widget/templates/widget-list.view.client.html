@@ -1,16 +1,16 @@
 <nav class="navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-text pull-left">
-            <a href="../views/page/page-list.view.client.html" class="white_navbar navbar-link">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page" class="white_navbar navbar-link">
                   <span class="grey-nav glyphicon glyphicon-chevron-left">
                   </span>
             </a>
         </div>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="">
             <label class="grey-nav">Widgets</label>
         </a>
         <div class="navbar-text pull-right">
-            <a href="widget-choose.view.client.html" class="navbar-link">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new" class="navbar-link">
                   <span class="grey-nav glyphicon glyphicon-plus">
                   </span>
             </a>
@@ -20,11 +20,17 @@
 
 
 
-
+<div class="top-padding"></div>
 
 <div class="container-fluid">
     <div  ng-repeat="widget in model.widgets">
        <div ng-switch="widget.widgetType">
+           <div class="jga-toolbar">
+               <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+                   <span class="glyphicon glyphicon-cog"></span>
+               </a>
+               <span class="glyphicon glyphicon-align-justify"></span>
+           </div>
            <div class="container-fluid" ng-include="model.getWidgetTemplateUrl(widget.widgetType)">
 
            </div>
@@ -50,7 +56,7 @@
         </div>
 
         <div class="navbar-text pull-right">
-            <a href="../views/user/profile.view.client.html" class="navbar-link">
+            <a href="#/user/{{model.userId}}" class="navbar-link">
                 <span class="blue-nav glyphicon glyphicon-user"></span>
             </a>
         </div>

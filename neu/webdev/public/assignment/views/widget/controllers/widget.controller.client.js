@@ -40,11 +40,11 @@
         }
     }
 
-    function NewWidgetController() {
+    function NewWidgetController($routeParams, $location, WidgetService) {
         var vm = this;
-        vm.userID = $routeParams['uid'];
-        vm.websiteID = $routeParams['wid'];
-        vm.pageID = $routeParams['pid'];
+        vm.userId = $routeParams['uid'];
+        vm.websiteId = $routeParams['wid'];
+        vm.pageId = $routeParams['pid'];
 
         //Event Handlers
         vm.newHeaderWidget = newHeaderWidget;
@@ -57,24 +57,27 @@
 
         function newHeaderWidget() {
             var headerWidget ={"widgetType": "HEADER", "size": 2, "text": "GIZMODO"};
-            WidgetService.createWidget(vm.pageID, headerWidget);
-            $location.url("/user/" + vm.userID + "/website/" + vm.websiteID + "/page/" + vm.pageID + "/widget");
+            headerWidget._id = (new Date()).getTime();
+            WidgetService.createWidget(vm.pageId, headerWidget);
+            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
 
         }
 
         function newImageWidget() {
             var imageWidget = {"widgetType": "IMAGE", "width": "100%",
                 "url": "http://lorempixel.com/400/200/"};
-            WidgetService.createWidget(vm.pageID, imageWidget);
-            $location.url("/user/" + vm.userID + "/website/" + vm.websiteID + "/page/" + vm.pageID + "/widget");
+            imageWidget._id = (new Date()).getTime();;
+            WidgetService.createWidget(vm.pageId, imageWidget);
+            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
 
         }
 
         function newYouTubeWidget() {
             var youTubeWidget ={"widgetType": "YOUTUBE", "width": "100%",
                 "url": "https://youtu.be/AM2Ivdi9c4E" };
-            WidgetService.createWidget(vm.pageID, youTubeWidget);
-            $location.url("/user/" + vm.userID + "/website/" + vm.websiteID + "/page/" + vm.pageID + "/widget");
+            youTubeWidget._id = (new Date()).getTime();
+            WidgetService.createWidget(vm.pageId, youTubeWidget);
+            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
         }
     }
 
@@ -105,7 +108,7 @@
         }
 
         function deleteWidget() {
-            WidgetService.deleteWidget(vm.widgetID);
+            WidgetService.deleteWidget(vm.widgetId);
             $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
         }
     }

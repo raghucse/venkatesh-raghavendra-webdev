@@ -47,7 +47,7 @@
 
         function findWidgetById(widgetId) {
             for (var i = 0; i < widgets.length; i++) {
-                if (widgets[i]._id === widgetId) {
+                if (widgets[i]._id == widgetId) {
                     return widgets[i];
                 }
             }
@@ -56,8 +56,8 @@
 
         function updateWidget(widgetId, widget) {
             for (var i = 0; i < widgets.length; i++) {
-                if (widgets[i]._id === widgetId) {
-                    widgets[i] = widget;
+                if (widgets[i]._id == widgetId) {
+                    widgets[i] = angular.copy(widget);
                 }
             }
         }
