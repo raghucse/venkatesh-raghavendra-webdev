@@ -14,6 +14,7 @@
         vm.websiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
         vm.doYouTrust = doYouTrust;
+
         function init() {
             vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
             console.log(vm.widgets);

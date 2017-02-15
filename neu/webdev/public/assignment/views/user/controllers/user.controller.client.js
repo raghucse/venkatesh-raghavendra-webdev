@@ -14,6 +14,11 @@
         vm.userId = $routeParams["uid"];
         vm.update =  update;
 
+        function init() {
+            vm.user = UserService.findUserById(vm.userId);
+        }
+        init();
+
         function update() {
             vm.user = UserService.updateUser(vm.userId, vm.user)
             if(vm.user == null){
@@ -23,10 +28,6 @@
             }
         }
 
-        function init() {
-            vm.user = UserService.findUserById(vm.userId);
-        }
-        init();
     }
 
     function LoginController(UserService, $location) {

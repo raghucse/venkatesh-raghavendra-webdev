@@ -14,10 +14,12 @@
             var vm = this;
             vm.websiteId = $routeParams["wid"];
             vm.userId = $routeParams["uid"];
+
             function init() {
                 vm.pages = PageService.findPagesByWebsiteId(vm.websiteId);
             }
             init();
+
         }
 
         function NewPageController() {
