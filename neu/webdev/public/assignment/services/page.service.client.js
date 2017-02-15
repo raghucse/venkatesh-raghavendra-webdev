@@ -28,7 +28,7 @@
 
         function createPage(websiteId, page){
             page.websiteId = websiteId;
-            pages.push(page);
+            pages.push(angular.copy(page));
         }
 
         function findPagesByWebsiteId(websiteId) {
@@ -53,7 +53,7 @@
         function updatePage(pageId, page) {
             for (var i = 0; i < pages.length; i++) {
                 if (pages[i]._id == pageId) {
-                    pages[i] = page;
+                    pages[i] = angular.copy(page);
                 }
             }
         }
@@ -61,7 +61,7 @@
         function deletePage(pageId) {
             for (var i = 0; i < pages.length; i++) {
                 if (pages[i]._id == pageId) {
-                    pages.remove(i);
+                    pages.splice(i, 1);
                 }
             }
         }
