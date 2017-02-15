@@ -1,16 +1,16 @@
 <nav class="navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-text pull-left">
-            <a href="../../website/templates/website-list.view.client.html" class="white_navbar navbar-link">
+            <a href="#/user/{{model.userId}}/website" class="white_navbar navbar-link">
                   <span class="grey-nav glyphicon glyphicon-chevron-left">
                   </span>
             </a>
         </div>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand">
             <label class="grey-nav">Pages</label>
         </a>
         <div class="navbar-text pull-right">
-            <a href="page-new.view.client.html" class="navbar-link">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/new" class="navbar-link">
                   <span class="grey-nav glyphicon glyphicon-plus">
                   </span>
             </a>
@@ -25,7 +25,7 @@
                 <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget">
                     {{page.name}}
                 </a>
-                <a href="page-edit.view.client.html" class="page-link pull-right">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}" class="page-link pull-right">
                       <span class="glyphicon glyphicon-cog">
                       </span>
                 </a>
@@ -38,7 +38,7 @@
 <nav class="navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-text pull-right">
-            <a href="../views/user/profile.view.client.html" class="navbar-link">
+            <a href="#/user/{{model.userId}}" class="navbar-link">
                 <span class="blue-nav glyphicon glyphicon-user"></span>
             </a>
         </div>
