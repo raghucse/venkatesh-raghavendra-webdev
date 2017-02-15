@@ -1,18 +1,19 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-text pull-left">
-            <a href="widget-list.view.client.html" class="white_navbar navbar-link">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="white_navbar navbar-link">
                   <span class="grey-nav glyphicon glyphicon-chevron-left">
                   </span>
             </a>
         </div>
+        <a class="navbar-brand">
+            <label class="grey-nav">Widget Edit</label>
+        </a>
         <div class="navbar-text pull-right">
-            <a href="website-new.html">
-                <span class="glyphicon glyphicon-plus"></span>
+            <a ng-click="model.updateWid(model.widget)" class="navbar-link">
+                  <span class="grey-nav glyphicon glyphicon-ok">
+                  </span>
             </a>
-        </div>
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Widget Editor</a>
         </div>
     </div>
 </nav>
@@ -24,7 +25,7 @@
 <nav class="navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-text pull-right">
-            <a href="../views/user/profile.view.client.html" class="navbar-link">
+            <a href="#/user/{{model.userId}}" class="navbar-link">
                 <span class="blue-nav glyphicon glyphicon-user"></span>
             </a>
         </div>
