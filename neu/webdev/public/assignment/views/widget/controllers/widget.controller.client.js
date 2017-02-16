@@ -57,7 +57,7 @@
 
         function newImageWidget() {
             var imageWidget = {"widgetType": "IMAGE", "width": "100%",
-                "url": "New Image URL"};
+                "url": "http://lorempixel.com/400/200/"};
             imageWidget._id = (new Date()).getTime();;
             WidgetService.createWidget(vm.pageId, imageWidget);
             $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+imageWidget._id);
@@ -66,7 +66,7 @@
 
         function newYouTubeWidget() {
             var youTubeWidget ={"widgetType": "YOUTUBE", "width": "100%",
-                "url": "New Youtube URL" };
+                "url": "https://youtu.be/AM2Ivdi9c4E" };
             youTubeWidget._id = (new Date()).getTime();
             WidgetService.createWidget(vm.pageId, youTubeWidget);
             $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+youTubeWidget._id);
