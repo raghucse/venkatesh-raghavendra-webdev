@@ -45,8 +45,6 @@
         vm.userId = $routeParams['uid'];
         vm.websiteId = $routeParams['wid'];
         vm.pageId = $routeParams['pid'];
-
-        //Event Handlers
         vm.newHeaderWidget = newHeaderWidget;
         vm.newImageWidget = newImageWidget;
         vm.newYouTubeWidget = newYouTubeWidget;
@@ -87,7 +85,6 @@
         vm.websiteId = $routeParams["wid"];
         vm.pageId = $routeParams["pid"];
         vm.widgetId = $routeParams["wgid"];
-        //Event Handler
         vm.getEditorTemplateUrl = getEditorTemplateUrl;
         vm.updateWid = updateWid;
         vm.deleteWidget = deleteWidget;

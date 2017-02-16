@@ -19,7 +19,7 @@
             "findUserById": findUserById,
             "findUserByUsername": findUserByUsername,
             "findUserByCredentials": findUserByCredentials,
-            "updateUser": fupdateUser,
+            "updateUser": updateUser,
             "deleteUser": deleteUser
         };
         return api;
@@ -55,7 +55,7 @@
             return null;
         }
 
-        function fupdateUser(userId, user) {
+        function updateUser(userId, user) {
             for (var i = 0; i < users.length; i++) {
                 if (users[i]._id == userId) {
                     users[i].firstName = user.firstName;
