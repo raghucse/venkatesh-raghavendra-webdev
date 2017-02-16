@@ -25,7 +25,7 @@
             if(vm.user == null){
                 vm.error = "Unable to update user";
             }{
-                vm.message = "User successfully updates";
+                vm.message = "User successfully updated";
             }
         }
 
