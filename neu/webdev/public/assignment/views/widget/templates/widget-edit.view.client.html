@@ -18,9 +18,19 @@
     </div>
 </nav>
 
-<div class="container-fluid" ng-include="model.getEditorTemplateUrl(model.widget.widgetType)">
 
+<div class="container-fluid" ng-switch="model.widget.widgetType">
+    <div ng-switch-when="HEADER">
+        <ng-include src="'views/widget/templates/editors/widget-header.view.client.html'"></ng-include>
+    </div>
+    <div ng-switch-when="IMAGE">
+        <ng-include src="'views/widget/templates/editors/widget-image.view.client.html'"></ng-include>
+    </div>
+    <div ng-switch-when="YOUTUBE">
+        <ng-include src="'views/widget/templates/editors/widget-youtube.view.client.html'"></ng-include>
+    </div>
 </div>
+
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
