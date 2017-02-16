@@ -15,7 +15,6 @@
         vm.pageId = $routeParams["pid"];
         vm.doYouTrust = doYouTrust;
         vm.getTrustedHtml = getTrustedHtml;
-        vm.getWidgetTemplateUrl = getWidgetTemplateUrl;
 
         function init() {
             vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
@@ -32,11 +31,6 @@
 
         function getTrustedHtml(html) {
             return $sce.trustAsHtml(html);
-        }
-
-        function getWidgetTemplateUrl(type) {
-            type = type.toLowerCase();
-            return "views/widget/templates/widget-"+type+".view.client.html";
         }
     }
 
