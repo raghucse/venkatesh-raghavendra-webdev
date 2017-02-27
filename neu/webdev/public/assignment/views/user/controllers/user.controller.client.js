@@ -50,7 +50,7 @@
                 if(user) {
                     $location.url("/user/"+user._id);
                 } else {
-                    vm.alert = "User not found";
+                    vm.error = "User not found";
                 }
             });
         }
@@ -66,8 +66,22 @@
 
         function register() {
             vm.user._id = (new Date()).getTime();
-            UserService.createUser(vm.user);
-            $location.url('/user/' + vm.user._id);
+            UserService
+                .findUserByUsername(vm.user.username)
+                .then(function (user) {
+                    vm.error = "sorry that username is taken";
+                },function(user){
+                    UserService
+                        .createUser(vm.user)
+                        .then(function(user){
+                            user = user.data;
+                            $location.url('/profile/' + user._id);
+                        })
+                        .catch(function (e) {
+                            vm.error = 'sorry could not register';
+                        });
+                })
+
         }
     }
 })();
