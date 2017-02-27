@@ -6,7 +6,7 @@
         .module("WebAppMaker")
         .factory("UserService", UserService);
 
-    function UserService() {
+    function UserService($http) {
         var users = [
             {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder", email: "opo@gmail.com"},
             {_id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley", email: "ere@gmail.com"},
@@ -29,42 +29,19 @@
         }
 
         function findUserById(userId) {
-            for (var i = 0; i < users.length; i++) {
-                if (users[i]._id == userId) {
-                    return angular.copy(users[i]);
-                }
-            }
-            return null;
+            return $http.get("/api/user/"+userId);
         }
 
         function findUserByUsername(username) {
-            for (var i = 0; i < users.length; i++) {
-                if (users[i].username == username) {
-                    return angular.copy(users[i]);
-                }
-            }
-            return null;
+            return $http.get("/api/user?username="+username);
         }
 
         function findUserByCredentials(username, password) {
-            for (var i = 0; i < users.length; i++) {
-                if (users[i].username === username && users[i].password === password) {
-                    return angular.copy(users[i]);
-                }
-            }
-            return null;
+            return $http.get("/api/user?username="+username+"&password="+password);
         }
 
-        function updateUser(userId, user) {
-            for (var i = 0; i < users.length; i++) {
-                if (users[i]._id == userId) {
-                    users[i].firstName = user.firstName;
-                    users[i].lastName = user.lastName;
-                    users[i].email = user.email;
-                    return angular.copy(users[i]);
-                }
-            }
-            return null;
+        function updateUser(userId, newUser) {
+            return $http.put("/api/user/"+userId, newUser);
         }
 
         function deleteUser(userId) {

@@ -41,14 +41,9 @@
         }
 
         function findAllWebsitesForUser(userId) {
-            sites = [];
-            for (var i = 0; i < websites.length; i++) {
-                if (websites[i].developerId == userId) {
-                    sites.push(websites[i]);
-                }
-            }
-            return sites;
+            return $http.get("/api/user/"+userId+"/website");
         }
+
         function findWebsiteById(websiteId) {
             for (var i = 0; i < websites.length; i++) {
                 if (websites[i]._id == websiteId) {

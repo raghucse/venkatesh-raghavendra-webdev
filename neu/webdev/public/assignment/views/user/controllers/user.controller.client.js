@@ -16,7 +16,10 @@
         vm.update =  update;
 
         function init() {
-            vm.user = UserService.findUserById(vm.userId);
+            var promise = UserService.findUserById(vm.userId);
+            promise.then(function(user){
+                vm.user = user.data;
+            });
         }
         init();
 
@@ -40,12 +43,16 @@
         init();
 
         function login(user) {
-            user = UserService.findUserByCredentials(user.username, user.password);
-            if(user != null) {
-                $location.url('/user/' + user._id);
-            } else {
-                vm.alert = "Unable to login";
-            }
+            var promise = UserService
+                .findUserByCredentials(user.username, user.password);
+            promise.then(function(user){
+                user = user.data;
+                if(user) {
+                    $location.url("/user/"+user._id);
+                } else {
+                    vm.alert = "User not found";
+                }
+            });
         }
     }
 
