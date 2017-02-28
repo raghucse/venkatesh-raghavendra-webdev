@@ -28,6 +28,7 @@ module.exports =  function(app) {
         var newWidget = req.body;
         newWidget.pageId = req.params.pageId;
         widgets.push(newWidget);
+        res.json(newWidget);
     }
 
     function findAllWidgetsForPage(req, res) {
@@ -51,7 +52,7 @@ module.exports =  function(app) {
         }
     }
 
-    function updateWidget(widgetId, widget) {
+    function updateWidget(req, res) {
         var widgetId = req.params.widgetId;
         var widget = req.body;
         for (var i = 0; i < widgets.length; i++) {
@@ -63,7 +64,7 @@ module.exports =  function(app) {
         }
     }
 
-    function deleteWidget(widgetId) {
+    function deleteWidget(req, res) {
         var widgetId = req.params.widgetId;
         for (var i = 0; i < widgets.length; i++) {
             if (widgets[i]._id == widgetId) {
