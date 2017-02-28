@@ -26,7 +26,6 @@ module.exports = function(app) {
     }
 
     function findAllPagesForWebsite(req, res) {
-        console.log("checking for al pages on server")
         var websiteId = req.params.websiteId;
         var allPages = [];
         for (var i = 0; i < pages.length; i++) {
@@ -38,7 +37,6 @@ module.exports = function(app) {
     }
 
     function findPageById(req, res) {
-        console.log("checking for an ID pages on server")
         var pageId = req.params.pageId;
         for (var i = 0; i < pages.length; i++) {
             if (pages[i]._id == pageId) {

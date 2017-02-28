@@ -25,12 +25,10 @@
         }
 
         function findPagesByWebsiteId(websiteId) {
-            console.log("Finding all by Id");
             return $http.get("/api/website/"+websiteId+"/page");
         }
 
         function findPageById(pageId) {
-            console.log("Finding by page");
             return $http.get("/api/page/"+pageId);
         }
 

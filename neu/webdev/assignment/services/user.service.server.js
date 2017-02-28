@@ -56,7 +56,6 @@ module.exports = function(app) {
     function findUserByCredentials(req, res){
         var username = req.query.username;
         var password = req.query.password;
-        console.log("find user by credentials HTTP service");
         var user = users.find(function(user){
             return user.password == password && user.username == username;
         });
@@ -66,7 +65,6 @@ module.exports = function(app) {
     function updateUser(req, res) {
         var userId = req.params.userId;
         var newUser = req.body;
-        console.log(newUser);
         for(var u in users) {
             if( users[u]._id == userId ) {
                 users[u].firstName = newUser.firstName;
