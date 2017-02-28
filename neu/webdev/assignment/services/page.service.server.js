@@ -20,7 +20,7 @@ module.exports = function(app) {
 
     function createPage(req, res){
         var newPage = req.body;
-        newPage.websiteId = req.query.websiteId;
+        newPage.websiteId = req.params.websiteId;
         pages.push(newPage);
         res.json(newPage);
     }

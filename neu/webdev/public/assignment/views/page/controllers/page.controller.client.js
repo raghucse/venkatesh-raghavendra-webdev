@@ -45,7 +45,7 @@
             PageService
                 .createPage(vm.websiteId, vm.page)
                 .then(function (page) {
-                    vm.page = page;
+                    vm.page = page.data;
                     $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
                 });
         }
