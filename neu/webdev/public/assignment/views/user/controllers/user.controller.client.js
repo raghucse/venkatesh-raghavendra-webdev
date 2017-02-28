@@ -75,13 +75,11 @@
                         .createUser(vm.user)
                         .then(function(user){
                             user = user.data;
-                            $location.url('/profile/' + user._id);
-                        })
-                        .catch(function (e) {
+                            $location.url('/user/' + user._id);
+                        }, function (user) {
                             vm.error = 'sorry could not register';
-                        });
+                        })
                 })
-
         }
     }
 })();

@@ -24,8 +24,8 @@
         };
         return api;
 
-        function createUser(user) {
-            users.push(angular.copy(user));
+        function createUser(newUser) {
+            return $http.post("/api/user", newUser);
         }
 
         function findUserById(userId) {
@@ -45,12 +45,7 @@
         }
 
         function deleteUser(userId) {
-            for (var i = 0; i < users.length; i++) {
-                if (users[i]._id == userId) {
-                    users.splice(i, 1);
-                }
-            }
-
+            return $http.delete("/api/user/"+userId, newUser);
         }
     }
 

@@ -4,7 +4,9 @@
 module.exports = function(app) {
     app.get("/api/user", findUser);
     app.get("/api/user/:userId", findUserById);
-    app.put("/api/user/:userId", updateUser)
+    app.put("/api/user/:userId", updateUser);
+    app.delete("/api/user/:userId", deleteUser);
+    app.post("/api/user", createUser);
 
 
     var users = [
@@ -15,8 +17,11 @@ module.exports = function(app) {
     ];
 
 
-    function createUser(user) {
-        users.push(angular.copy(user));
+    function createUser(req, res) {
+        console.log("Reached safely");
+        var newUser = req.body;
+        users.push(newUser);
+        res.json(newUser);
     }
 
     function findUser(req, res) {
@@ -68,18 +73,22 @@ module.exports = function(app) {
             if( users[u]._id == userId ) {
                 users[u].firstName = newUser.firstName;
                 users[u].lastName = newUser.lastName;
+                users[u].email = user.email;
                 res.json(users[u]);
                 return;
             }
         }
     }
 
-    function deleteUser(userId) {
-        for (var i = 0; i < users.length; i++) {
-            if (users[i]._id == userId) {
-                users.splice(i, 1);
+    function deleteUser(req, res) {
+        var userId = req.params.userId;
+        for(var u in users) {
+            if(users[u]._id == userId) {
+                users.splice(u, 1);
+                res.sendStatus(200);
+                return;
             }
         }
-
+        res.sendStatus(404);
     }
 };
