@@ -6,7 +6,7 @@
         .module("WebAppMaker")
         .factory("WebsiteService", WebsiteService);
 
-    function WebsiteService() {
+    function WebsiteService($http) {
         var api = {
             "createWebsite": createWebsite,
             "findWebsiteById": findWebsiteById,

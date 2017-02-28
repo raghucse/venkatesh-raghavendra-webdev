@@ -17,7 +17,11 @@
         vm.getTrustedHtml = getTrustedHtml;
 
         function init() {
-            vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
+             WidgetService
+                .findWidgetsByPageId(vm.pageId)
+                .then(function (widgets) {
+                    vm.widgets = widgets.data;
+                });
         }
         init();
 
@@ -97,7 +101,7 @@
                 WidgetService
                     .findWidgetById(vm.widgetId)
                     .then(function (widget) {
-                        vm.widget = widget;
+                        vm.widget = widget.data;
                     });
         }
         init();

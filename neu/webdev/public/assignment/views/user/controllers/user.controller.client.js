@@ -24,12 +24,14 @@
         init();
 
         function update() {
-            vm.user = UserService.updateUser(vm.userId, vm.user);
-            if(vm.user == null){
-                vm.error = "Unable to update user";
-            }{
-                vm.message = "User successfully updated";
-            }
+            UserService
+                .updateUser(vm.userId, vm.user)
+                .then(function (user) {
+                    vm.user = user.data;
+                    vm.message = "User successfully updated";
+                }, function (user) {
+                    vm.error = "Unable to update user";
+                });
         }
 
     }

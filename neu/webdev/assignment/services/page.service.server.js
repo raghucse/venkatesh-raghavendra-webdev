@@ -26,19 +26,20 @@ module.exports = function(app) {
     }
 
     function findAllPagesForWebsite(req, res) {
+        console.log("checking for al pages on server")
         var websiteId = req.params.websiteId;
         var allPages = [];
         for (var i = 0; i < pages.length; i++) {
             if (pages[i].websiteId == websiteId) {
-                allPages.push(angular.copy(pages[i]));
+                allPages.push(pages[i]);
             }
         }
         res.json(allPages);
     }
 
-    function findPageById(pageId) {
+    function findPageById(req, res) {
+        console.log("checking for an ID pages on server")
         var pageId = req.params.pageId;
-
         for (var i = 0; i < pages.length; i++) {
             if (pages[i]._id == pageId) {
                 res.json(pages[i]);
@@ -47,7 +48,7 @@ module.exports = function(app) {
         }
     }
 
-    function updatePage(pageId, page) {
+    function updatePage(req, res) {
         var pageId = req.params.pageId;
         var page = req.body;
         for (var i = 0; i < pages.length; i++) {
@@ -59,7 +60,7 @@ module.exports = function(app) {
         }
     }
 
-    function deletePage(pageId) {
+    function deletePage(req, res) {
         var pageId = req.params.pageId;
         for (var i = 0; i < pages.length; i++) {
             if (pages[i]._id == pageId) {

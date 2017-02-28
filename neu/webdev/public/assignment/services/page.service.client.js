@@ -10,7 +10,7 @@
         .module("WebAppMaker")
         .factory("PageService", PageService);
 
-    function PageService() {
+    function PageService($http) {
         var api = {
             "createPage": createPage,
             "findPagesByWebsiteId": findPagesByWebsiteId,
@@ -25,10 +25,12 @@
         }
 
         function findPagesByWebsiteId(websiteId) {
+            console.log("Finding all by Id");
             return $http.get("/api/website/"+websiteId+"/page");
         }
 
         function findPageById(pageId) {
+            console.log("Finding by page");
             return $http.get("/api/page/"+pageId);
         }
 

@@ -35,7 +35,7 @@ module.exports =  function(app) {
         var allWidgets = [];
         for (var i = 0; i < widgets.length; i++) {
             if (widgets[i].pageId == pageId) {
-                allWidgets.push(angular.copy(widgets[i]));
+                allWidgets.push(widgets[i]);
             }
         }
         res.json(allWidgets);
