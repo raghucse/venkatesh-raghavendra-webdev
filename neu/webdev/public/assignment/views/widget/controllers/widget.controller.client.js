@@ -50,8 +50,11 @@
         function newHeaderWidget() {
             var headerWidget ={"widgetType": "HEADER", "size": 2, "text": "New Header"};
             headerWidget._id = (new Date()).getTime();
-            WidgetService.createWidget(vm.pageId, headerWidget);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+headerWidget._id);
+            WidgetService
+                .createWidget(vm.pageId, headerWidget)
+                .then(function (newWidget) {
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+headerWidget._id);
+                });
 
         }
 
@@ -59,8 +62,11 @@
             var imageWidget = {"widgetType": "IMAGE", "width": "100%",
                 "url": "http://lorempixel.com/400/200/"};
             imageWidget._id = (new Date()).getTime();;
-            WidgetService.createWidget(vm.pageId, imageWidget);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+imageWidget._id);
+            WidgetService
+                .createWidget(vm.pageId, imageWidget)
+                .then(function (newWidget) {
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+imageWidget._id);
+                });
 
         }
 
@@ -68,8 +74,11 @@
             var youTubeWidget ={"widgetType": "YOUTUBE", "width": "100%",
                 "url": "https://youtu.be/AM2Ivdi9c4E" };
             youTubeWidget._id = (new Date()).getTime();
-            WidgetService.createWidget(vm.pageId, youTubeWidget);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+youTubeWidget._id);
+            WidgetService
+                .createWidget(vm.pageId, youTubeWidget)
+                .then(function (newWidget) {
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+youTubeWidget._id);
+                });
         }
     }
 
@@ -84,7 +93,12 @@
         vm.deleteWidget = deleteWidget;
 
         function init() {
-            vm.widget = WidgetService.findWidgetById(vm.widgetId);
+            vm.widget =
+                WidgetService
+                    .findWidgetById(vm.widgetId)
+                    .then(function (widget) {
+                        vm.widget = widget;
+                    });
         }
         init();
 
@@ -94,13 +108,19 @@
         }
 
         function updateWid(widget) {
-            WidgetService.updateWidget(vm.widgetId, widget);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+            WidgetService
+                .updateWidget(vm.widgetId, widget)
+                .then(function () {
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                });
         }
 
         function deleteWidget() {
-            WidgetService.deleteWidget(vm.widgetId);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+            WidgetService
+                .deleteWidget(vm.widgetId)
+                .then(function () {
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                });
         }
     }
 })();

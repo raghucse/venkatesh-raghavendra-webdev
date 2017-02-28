@@ -18,7 +18,6 @@ module.exports = function(app) {
 
 
     function createUser(req, res) {
-        console.log("Reached safely");
         var newUser = req.body;
         users.push(newUser);
         res.json(newUser);
@@ -61,7 +60,6 @@ module.exports = function(app) {
         var user = users.find(function(user){
             return user.password == password && user.username == username;
         });
-        console.log(user);
         res.json(user);
     }
 

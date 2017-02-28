@@ -5,64 +5,91 @@
 
 (function() {
     var app = angular
-         .module("WebAppMaker");
-         app.controller("PageListController", PageListController);
-         app.controller("NewPageController", NewPageController);
-         app.controller("EditPageController", EditPageController);
+        .module("WebAppMaker");
+    app.controller("PageListController", PageListController);
+    app.controller("NewPageController", NewPageController);
+    app.controller("EditPageController", EditPageController);
 
-        function PageListController($routeParams, PageService) {
-            var vm = this;
-            vm.websiteId = $routeParams["wid"];
-            vm.userId = $routeParams["uid"];
+    function PageListController($routeParams, PageService) {
+        var vm = this;
+        vm.websiteId = $routeParams["wid"];
+        vm.userId = $routeParams["uid"];
 
-            function init() {
-                vm.pages = PageService.findPagesByWebsiteId(vm.websiteId);
-            }
-            init();
+        function init() {
+            var promise = PageService.findPagesByWebsiteId(vm.websiteId);
+            promise.then(function (pages) {
+                vm.pages = pages.data;
+            });
+
+        }
+        init();
+
+    }
+
+    function NewPageController($routeParams, PageService, $location) {
+        var vm = this;
+        vm.websiteId = $routeParams["wid"];
+        vm.userId = $routeParams["uid"];
+        vm.createPage = createPage;
+
+        function init() {
+            var promise = PageService.findPagesByWebsiteId(vm.websiteId);
+            promise.then(function (pages) {
+                vm.pages = pages.data;
+            });
+        }
+        init();
+
+        function createPage() {
+            vm.page._id = (new Date()).getTime();
+            PageService
+                .createPage(vm.websiteId, vm.page)
+                .then(function (page) {
+                    vm.page = page;
+                    $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+                });
+        }
+    }
+
+    function EditPageController($routeParams, PageService, $location) {
+        var vm = this;
+        vm.websiteId = $routeParams["wid"];
+        vm.userId = $routeParams["uid"];
+        vm.pageId = $routeParams["pid"];
+        vm.deletePage = deletePage;
+        vm.updatePage = updatePage;
+
+        function init() {
+            PageService
+                .findPagesByWebsiteId(vm.websiteId)
+                .then(function (pages) {
+                    vm.pages = pages.data;
+                });
+            PageService
+                .findPageById(vm.pageId)
+                .then(function (page) {
+                    vm.page = page.data;
+                });
+        }
+        init();
+
+        function deletePage() {
+            PageService
+                .deletePage(vm.pageId)
+                .then(function () {
+                    $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+                });
 
         }
 
-        function NewPageController($routeParams, PageService, $location) {
-            var vm = this;
-            vm.websiteId = $routeParams["wid"];
-            vm.userId = $routeParams["uid"];
-            vm.createPage = createPage;
+        function updatePage() {
+            PageService
+                .updatePage(vm.pageId, vm.page)
+                .then(function (page) {
+                    vm.page = page.data;
+                    $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+                });
 
-            function init() {
-                vm.pages = PageService.findPagesByWebsiteId(vm.websiteId);
-            }
-            init();
-
-            function createPage() {
-                console.log(vm.page);
-                vm.page._id = (new Date()).getTime();
-                PageService.createPage(vm.websiteId, vm.page);
-                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
-            }
         }
-
-        function EditPageController($routeParams, PageService, $location) {
-            var vm = this;
-            vm.websiteId = $routeParams["wid"];
-            vm.userId = $routeParams["uid"];
-            vm.pageId = $routeParams["pid"];
-            vm.deletePage = deletePage;
-            vm.updatePage = updatePage;
-
-            function init() {
-                vm.pages = PageService.findPagesByWebsiteId(vm.websiteId);
-                vm.page = PageService.findPageById(vm.pageId);
-            }
-            init();
-
-            function deletePage() {
-                PageService.deletePage(vm.pageId);
-                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
-            }
-
-            function updatePage() {
-                PageService.updatePage(vm.pageId, vm.page);
-                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
-            }
-        }
+    }
 })();

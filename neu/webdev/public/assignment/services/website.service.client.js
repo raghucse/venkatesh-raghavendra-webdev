@@ -18,7 +18,6 @@
 
         var api = {
             "createWebsite": createWebsite,
-            "findWebsitesByUser": findWebsitesByUser,
             "findWebsiteById": findWebsiteById,
             "updateWebsite": updateWebsite,
             "deleteWebsite": deleteWebsite,
@@ -27,17 +26,7 @@
         return api;
 
         function createWebsite(userId, website) {
-            website.developerId = userId;
-            websites.push(angular.copy(website));
-        }
-
-        function findWebsitesByUser(userId) {
-            for (var i = 0; i < websites.length; i++) {
-                if (websites[i].developerId == userId) {
-                    return websites[i];
-                }
-            }
-            return null;
+            return $http.post("/api/user/"+userId+"/website", website);
         }
 
         function findAllWebsitesForUser(userId) {
@@ -45,29 +34,15 @@
         }
 
         function findWebsiteById(websiteId) {
-            for (var i = 0; i < websites.length; i++) {
-                if (websites[i]._id == websiteId) {
-                    return angular.copy(websites[i]);
-                }
-            }
-            return null;
+            return $http.get("/api/website/"+websiteId);
         }
 
         function updateWebsite(websiteId, website) {
-            for (var i = 0; i < websites.length; i++) {
-                if (websites[i]._id == websiteId) {
-                    websites[i] = angular.copy(website);
-                }
-            }
-            return null;
+            return $http.put("/api/website/"+websiteId, website);
         }
 
         function deleteWebsite(websiteId) {
-            for (var i = 0; i < websites.length; i++) {
-                if (websites[i]._id == websiteId) {
-                    websites.splice(i, 1);
-                }
-            }
+            return $http.delete("/api/website/"+websiteId);
         }
     }
 

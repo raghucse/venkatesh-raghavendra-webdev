@@ -27,43 +27,23 @@
         return api;
 
         function createPage(websiteId, page){
-            page.websiteId = websiteId;
-            pages.push(angular.copy(page));
+            return $http.post("/api/website/"+websiteId+"/page", page);
         }
 
         function findPagesByWebsiteId(websiteId) {
-            var allPages = [];
-            for (var i = 0; i < pages.length; i++) {
-                if (pages[i].websiteId == websiteId) {
-                    allPages.push(angular.copy(pages[i]));
-                }
-            }
-            return allPages;
+            return $http.get("/api/website/"+websiteId+"/page");
         }
 
         function findPageById(pageId) {
-            for (var i = 0; i < pages.length; i++) {
-                if (pages[i]._id == pageId) {
-                    return pages[i];
-                }
-            }
-            return null;
+            return $http.get("/api/page/"+pageId);
         }
 
         function updatePage(pageId, page) {
-            for (var i = 0; i < pages.length; i++) {
-                if (pages[i]._id == pageId) {
-                    pages[i] = angular.copy(page);
-                }
-            }
+            return $http.put("/api/page/"+pageId, page);
         }
 
         function deletePage(pageId) {
-            for (var i = 0; i < pages.length; i++) {
-                if (pages[i]._id == pageId) {
-                    pages.splice(i, 1);
-                }
-            }
+            return $http.delete("/api/page/"+pageId);
         }
     }
 

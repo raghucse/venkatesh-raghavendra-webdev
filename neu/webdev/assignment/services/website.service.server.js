@@ -2,7 +2,11 @@
  * Created by raghu on 2/8/2017.
  */
 module.exports =  function(app) {
-    app.get('/api/user/:userId/website', findAllWebsitesForUser);
+    app.get("/api/user/:userId/website", findAllWebsitesForUser);
+    app.get("/api/website/:websiteId", findWebsiteById);
+    app.put("/api/website/:websiteId", updateWebsite);
+    app.delete("/api/website/:websiteId", deleteWebsite);
+    app.post("/api/user/:userId/website", createWebsite);
 
     var websites  = [
         { "_id": "123", "name": "Facebook",    "developerId": "456", "description": "Lorem" },
@@ -13,18 +17,11 @@ module.exports =  function(app) {
         { "_id": "789", "name": "Chess",       "developerId": "234", "description": "Lorem" }
     ];
 
-    function createWebsite(userId, website) {
-        website.developerId = userId;
-        websites.push(angular.copy(website));
-    }
-
-    function findWebsitesByUser(userId) {
-        for (var i = 0; i < websites.length; i++) {
-            if (websites[i].developerId == userId) {
-                return websites[i];
-            }
-        }
-        return null;
+    function createWebsite(req, res) {
+        var newWebsite = req.body;
+        newWebsite.developerId = req.params.userId;
+        websites.push(newWebsite);
+        res.json(newWebsite)
     }
 
     function findAllWebsitesForUser(req, res) {
@@ -37,28 +34,36 @@ module.exports =  function(app) {
         }
         res.json(sites);
     }
-    function findWebsiteById(websiteId) {
+
+    function findWebsiteById(req, res) {
+          var websiteId = req.params.websiteId;
         for (var i = 0; i < websites.length; i++) {
             if (websites[i]._id == websiteId) {
-                return angular.copy(websites[i]);
+                res.json(websites[i]);
+                return;
             }
         }
-        return null;
     }
 
-    function updateWebsite(websiteId, website) {
+    function updateWebsite(req, res) {
+        var websiteId = req.params.websiteId;
+        var website = req.body;
         for (var i = 0; i < websites.length; i++) {
             if (websites[i]._id == websiteId) {
-                websites[i] = angular.copy(website);
+                websites[i] = website;
+                res.json(website);
+                return;
             }
         }
-        return null;
     }
 
-    function deleteWebsite(websiteId) {
+    function deleteWebsite(req, res) {
+        var websiteId = req.params.websiteId;
         for (var i = 0; i < websites.length; i++) {
             if (websites[i]._id == websiteId) {
                 websites.splice(i, 1);
+                res.sendStatus(200);
+                return;
             }
         }
     }
