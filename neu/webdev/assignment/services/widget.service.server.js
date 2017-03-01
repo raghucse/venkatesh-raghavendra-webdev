@@ -6,11 +6,15 @@
  * Created by raghu on 2/8/2017.
  */
 module.exports =  function(app) {
+    var multer = require('multer');
+    var upload = multer({ dest: __dirname+'/../../public/uploads' });
+
     app.post("/api/page/:pageId/widget", createWidget);
     app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
     app.get("/api/widget/:widgetId", findWidgetById);
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/widget/:widgetId", deleteWidget);
+    app.post ("/api/upload", upload.single('myFile'), uploadImage);
 
 
 
@@ -69,6 +73,30 @@ module.exports =  function(app) {
         for (var i = 0; i < widgets.length; i++) {
             if (widgets[i]._id == widgetId) {
                 widgets.splice(i, 1);
+                res.sendStatus(200);
+                return;
+            }
+        }
+    }
+
+    function uploadImage(req, res) {
+
+        var widgetId      = req.body.widgetId;
+        var width         = req.body.width;
+        var myFile        = req.file;
+
+        var originalname  = myFile.originalname; // file name on user's computer
+        var filename      = myFile.filename;     // new file name in upload folder
+        var path          = myFile.path;         // full path of uploaded file
+        var destination   = myFile.destination;  // folder where file is saved to
+        var size          = myFile.size;
+        var mimetype      = myFile.mimetype;
+        var serverPath = "../../../../../uploads/"+filename;
+
+        for (var i = 0; i < widgets.length; i++) {
+            if (widgets[i]._id == widgetId) {
+                widgets[i].width = width;
+                widgets[i].url = serverPath
                 res.sendStatus(200);
                 return;
             }
