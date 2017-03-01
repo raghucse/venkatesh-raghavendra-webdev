@@ -21,6 +21,7 @@
                 .findWidgetsByPageId(vm.pageId)
                 .then(function (widgets) {
                     vm.widgets = widgets.data;
+                    vm.widgets.sort(function(a,b) {return (a.index > b.index) ? 1 : ((b.index > a.index) ? -1 : 0);} );
                 });
         }
         init();

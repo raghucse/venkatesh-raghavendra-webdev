@@ -15,22 +15,31 @@ module.exports =  function(app) {
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/widget/:widgetId", deleteWidget);
     app.post ("/api/upload", upload.single('myFile'), uploadImage);
+    app.put("/page/:pageId/widget", updateOrder);
 
 
 
     var widgets  = [
-        { "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": "2", "text": "GIZMODO"},
-        { "_id": "234", "widgetType": "HEADER", "pageId": "321", "size": "4", "text": "Lorem ipsum"},
-        { "_id": "345", "widgetType": "IMAGE", "pageId": "321", "width": "100%","url": "http://lorempixel.com/400/200/"},
-        { "_id": "456", "widgetType": "HTML", "pageId": "321", "text": "Lorem ipsum"},
-        { "_id": "567", "widgetType": "HEADER", "pageId": "321", "size": "4", "text": "Lorem ipsum"},
-        { "_id": "678", "widgetType": "YOUTUBE", "pageId": "321", "width": "100%","url": "https://youtu.be/AM2Ivdi9c4E" },
-        { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "Lorem ipsum"}
+        { "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": "2", "text": "GIZMODO", "index": "0"},
+        { "_id": "234", "widgetType": "HEADER", "pageId": "321", "size": "4", "text": "Lorem ipsum", "index": "1"},
+        { "_id": "345", "widgetType": "IMAGE", "pageId": "321", "width": "100%","url": "http://lorempixel.com/400/200/", "index": "2"},
+        { "_id": "456", "widgetType": "HTML", "pageId": "321", "text": "Lorem ipsum", "index": "3"},
+        { "_id": "567", "widgetType": "HEADER", "pageId": "321", "size": "4", "text": "Lorem ipsum", "index": "4"},
+        { "_id": "678", "widgetType": "YOUTUBE", "pageId": "321", "width": "100%","url": "https://youtu.be/AM2Ivdi9c4E", "index": "5"},
+        { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "Lorem ipsum", "index": "6"}
     ]
 
     function createWidget(req, res){
         var newWidget = req.body;
         newWidget.pageId = req.params.pageId;
+
+        var count = 0;
+        for (var i = 0; i < widgets.length; i++) {
+            if (widgets[i].pageId == newWidget.pageId) {
+                count++;
+            }
+        }
+        newWidget.index = count;
         widgets.push(newWidget);
         res.json(newWidget);
     }
@@ -105,4 +114,20 @@ module.exports =  function(app) {
             }
         }
     }
+
+
+    function updateOrder(req, res) {
+        var pageId = req.params.pageId;
+        var newmap = req.body;
+        console.log(newmap);
+        for (var i = 0; i < widgets.length; i++) {
+            if(widgets[i].pageId = pageId) {
+                id = widgets[i]._id;
+                widgets[i].index = newmap[id];
+            }
+
+        }
+        res.sendStatus(200);
+    }
+
 }
