@@ -36,6 +36,7 @@
         function getTrustedHtml(html) {
             return $sce.trustAsHtml(html);
         }
+
     }
 
     function NewWidgetController($routeParams, $location, WidgetService) {

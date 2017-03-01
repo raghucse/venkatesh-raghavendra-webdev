@@ -83,6 +83,9 @@ module.exports =  function(app) {
 
         var widgetId      = req.body.widgetId;
         var width         = req.body.width;
+        var userId         = req.body.userId;
+        var pageId         = req.body.pageId;
+        var websiteId      = req.body.websiteId;
         var myFile        = req.file;
 
         var originalname  = myFile.originalname; // file name on user's computer
@@ -97,7 +100,7 @@ module.exports =  function(app) {
             if (widgets[i]._id == widgetId) {
                 widgets[i].width = width;
                 widgets[i].url = serverPath
-                res.sendStatus(200);
+                res.redirect("/assignment/index.html#/user/"+userId+ "/website/"+websiteId+"/page/"+pageId+"/widget");
                 return;
             }
         }
