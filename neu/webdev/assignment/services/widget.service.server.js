@@ -124,7 +124,6 @@ module.exports =  function(app) {
                 id = widgets[i]._id;
                 widgets[i].index = newmap[id];
             }
-
         }
         res.sendStatus(200);
     }
