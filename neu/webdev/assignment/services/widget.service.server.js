@@ -120,7 +120,7 @@ module.exports =  function(app) {
         var pageId = req.params.pageId;
         var newmap = req.body;
         for (var i = 0; i < widgets.length; i++) {
-            if(widgets[i].pageId = pageId) {
+            if(widgets[i].pageId === pageId) {
                 id = widgets[i]._id;
                 widgets[i].index = newmap[id];
             }
