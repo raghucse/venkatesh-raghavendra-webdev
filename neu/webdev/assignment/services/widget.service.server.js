@@ -119,7 +119,6 @@ module.exports =  function(app) {
     function updateOrder(req, res) {
         var pageId = req.params.pageId;
         var newmap = req.body;
-        console.log(newmap);
         for (var i = 0; i < widgets.length; i++) {
             if(widgets[i].pageId = pageId) {
                 id = widgets[i]._id;
