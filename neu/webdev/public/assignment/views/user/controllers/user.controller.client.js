@@ -10,10 +10,11 @@
     app.controller("ProfileController", ProfileController);
     app.controller("RegisterController", RegisterController);
 
-    function ProfileController($routeParams, UserService) {
+    function ProfileController($routeParams, UserService, $location) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.update =  update;
+        vm.deleteUser = deleteUser;
 
         function init() {
             var promise = UserService.findUserById(vm.userId);
@@ -32,6 +33,19 @@
                 }, function (user) {
                     vm.error = "Unable to update user";
                 });
+        }
+
+        function deleteUser(user) {
+            var cfrm = confirm("Are you sure that you want to delete?")
+            if(cfrm){
+                UserService
+                    .deleteUser(user._id)
+                    .then(function () {
+                        $location.url("/login");
+                    },function () {
+                        vm.error = "Unable to UnRegister User";
+                    });
+            }
         }
 
     }
