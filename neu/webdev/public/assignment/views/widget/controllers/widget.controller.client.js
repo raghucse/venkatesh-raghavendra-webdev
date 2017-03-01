@@ -17,7 +17,7 @@
         vm.getTrustedHtml = getTrustedHtml;
 
         function init() {
-             WidgetService
+            WidgetService
                 .findWidgetsByPageId(vm.pageId)
                 .then(function (widgets) {
                     vm.widgets = widgets.data;
