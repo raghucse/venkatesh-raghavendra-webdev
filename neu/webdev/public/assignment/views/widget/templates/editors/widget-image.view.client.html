@@ -42,6 +42,11 @@
         <input  name="websiteId" value="{{model.websiteId}}"   style="display: none"/>
         <button  type="submit" class="btn btn-block btn-primary form-control">Upload Image</button>
     </form>
+
+    <div class="form-group">
+       <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widget._id}}/flicker" class="btn btn-info form-control">Search</a>
+    </div>
+
     <div class="bottom-padding">
         <a ng-click="model.deleteWidget()" class="btn btn-danger form-control">Delete</a>
     </div>

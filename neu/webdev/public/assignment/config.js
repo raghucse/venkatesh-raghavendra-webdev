@@ -9,7 +9,11 @@
             $locationProvider.hashPrefix('');
         }]);
 
-    function configuration($routeProvider, $locationProvider) {
+    function configuration($routeProvider, $locationProvider, $httpProvider) {
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+        $httpProvider.defaults.headers.put['Content-Type'] = 'application/json;charset=utf-8';
+
+
         $routeProvider
             .when("/login", {
                 templateUrl: "views/user/templates/login.view.client.html",
@@ -75,6 +79,12 @@
             .when("/user/:uid/website/:wid/page/:pid/widget/:wgid",{
                 templateUrl: "views/widget/templates/widget-edit.view.client.html",
                 controller: "EditWidgetController",
+                controllerAs: "model"
+            })
+
+            .when("/user/:uid/website/:wid/page/:pid/widget/:wgid/flicker",{
+                templateUrl: "views/widget/templates/editors/widget-flickr-search.view.client.html",
+                controller: "FlickrImageSearchController",
                 controllerAs: "model"
             })
             .otherwise({

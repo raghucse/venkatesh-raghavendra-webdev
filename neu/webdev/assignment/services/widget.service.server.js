@@ -13,11 +13,10 @@ module.exports =  function(app) {
     app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
     app.get("/api/widget/:widgetId", findWidgetById);
     app.put("/api/widget/:widgetId", updateWidget);
+    app.put("/api/flickr/:widgetId", updateWidgetFlickr);
     app.delete("/api/widget/:widgetId", deleteWidget);
     app.post ("/api/upload", upload.single('myFile'), uploadImage);
     app.put("/page/:pageId/widget", updateWidgetOrder);
-
-
 
     var widgets  = [
         { "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": "2", "text": "GIZMODO", "index": "0"},
@@ -72,6 +71,18 @@ module.exports =  function(app) {
             if (widgets[i]._id == widgetId) {
                 widgets[i] = widget;
                 res.json(widgets[i]);
+                return;
+            }
+        }
+    }
+
+    function updateWidgetFlickr(req, res) {
+        var widgetId = req.params.widgetId;
+        var link = req.body;
+        for (var i = 0; i < widgets.length; i++) {
+            if (widgets[i]._id == widgetId) {
+                widgets[i].url = link.url;
+                res.sendStatus(200);
                 return;
             }
         }
