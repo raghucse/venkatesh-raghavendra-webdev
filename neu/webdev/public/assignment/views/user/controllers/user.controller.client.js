@@ -81,7 +81,6 @@
         init();
 
         function register() {
-            vm.user._id = (new Date()).getTime();
             UserService
                 .findUserByUsername(vm.user.username)
                 .then(function (user) {

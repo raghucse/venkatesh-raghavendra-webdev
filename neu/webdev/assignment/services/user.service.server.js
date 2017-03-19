@@ -1,7 +1,7 @@
 /**
  * Created by raghu on 2/8/2017.
  */
-module.exports = function(app) {
+module.exports = function(app, userModel) {
     app.get("/api/user", findUser);
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
@@ -19,8 +19,15 @@ module.exports = function(app) {
 
     function createUser(req, res) {
         var newUser = req.body;
-        users.push(newUser);
-        res.json(newUser);
+        /*users.push(newUser);
+        res.json(newUser);*/
+
+        userModel.createUser(newUser)
+            .then(function (user) {
+                res.send(200);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
     }
 
     function findUser(req, res) {
