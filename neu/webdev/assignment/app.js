@@ -18,9 +18,10 @@ module.exports = function(app) {
         }
     });
 
-    var userModel = require('./model/user/user.model.server.js')();
-    require('./services/user.service.server.js')(app, userModel);
-    require("./services/website.service.server.js")(app);
-    require("./services/page.service.server.js")(app);
-    require("./services/widget.service.server.js")(app);
+    var model = require('./model/model.server.js')(mongoose);
+
+    require('./services/user.service.server.js')(app, model.userModel);
+    require("./services/page.service.server.js")(app, model.pageModel);
+    require("./services/website.service.server.js")(app, model.websiteModel);
+    require("./services/widget.service.server.js")(app, model.widgetModel);
 };

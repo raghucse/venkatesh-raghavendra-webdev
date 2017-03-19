@@ -1,5 +1,4 @@
-module.exports = function () {
-    var mongoose = require('mongoose');
+module.exports = function (mongoose) {
 
     var UserSchema = mongoose.Schema({
         username: String,
@@ -9,7 +8,7 @@ module.exports = function () {
         email: String,
         phone: String,
         websites: [],
-       dateCreated: Date
+        dateCreated: Date
     }, {collection: 'assignment.user'});
 
     return UserSchema;
