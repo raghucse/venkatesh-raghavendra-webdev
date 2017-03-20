@@ -22,7 +22,7 @@ module.exports = function (mongoose, q) {
                     deferred.abort();
                 }
                 else {
-                    deferred.resolve();
+                    deferred.resolve(doc);
                 }
         });
         return deferred.promise;
