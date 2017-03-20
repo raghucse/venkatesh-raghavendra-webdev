@@ -19,9 +19,6 @@ module.exports = function(app, userModel) {
 
     function createUser(req, res) {
         var newUser = req.body;
-        /*users.push(newUser);
-        res.json(newUser);*/
-
         userModel.createUser(newUser)
             .then(function (user) {
                 res.send(200);
@@ -43,36 +40,53 @@ module.exports = function(app, userModel) {
 
     function findUserById(req, res) {
         var userId = req.params.userId;
-        var user = users.find(function (u) {
-            return u._id == userId;
-        });
-        res.json(user);
+        userModel.findUserById(userId)
+            .then(function (user) {
+                res.json(user);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
     }
 
     function findUserByUsername(req, res) {
-        var user = users.find(function (u) {
+        var username = req.query.username;
+    /*    var user = users.find(function (u) {
             return u.username == req.query.username;
         });
         if(user) {
             res.json(user);
         } else {
             res.sendStatus(404);
-        }
+        }*/
+
+        userModel.findUserByUsername(username)
+            .then(function (user) {
+                res.json(user);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
     }
 
     function findUserByCredentials(req, res){
         var username = req.query.username;
         var password = req.query.password;
-        var user = users.find(function(user){
+        /*var user = users.find(function(user){
             return user.password == password && user.username == username;
         });
-        res.json(user);
+        res.json(user);*/
+
+        userModel.findUserByCreadentials(username, password)
+            .then(function (user) {
+                res.json(user);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
     }
 
     function updateUser(req, res) {
         var userId = req.params.userId;
         var newUser = req.body;
-        for(var u in users) {
+      /*  for(var u in users) {
             if( users[u]._id == userId ) {
                 users[u].firstName = newUser.firstName;
                 users[u].lastName = newUser.lastName;
@@ -80,7 +94,13 @@ module.exports = function(app, userModel) {
                 res.json(users[u]);
                 return;
             }
-        }
+        }*/
+        userModel.updateUser(userId, newUser)
+            .then(function (user) {
+                res.json(user);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
     }
 
     function deleteUser(req, res) {
