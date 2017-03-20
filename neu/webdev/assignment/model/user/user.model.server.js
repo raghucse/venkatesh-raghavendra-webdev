@@ -91,6 +91,15 @@ module.exports = function (mongoose, q) {
     }
 
     function deleteUser(userId) {
-
+        var deferred = q.defer();
+        UserModel.remove({_id: userId}, function (err, status) {
+            if(err){
+                deferred.abort();
+            }
+            else {
+                deferred.resolve();
+            }
+        })
+        return deferred.promise;
     }
 };

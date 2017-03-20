@@ -50,15 +50,6 @@ module.exports = function(app, userModel) {
 
     function findUserByUsername(req, res) {
         var username = req.query.username;
-    /*    var user = users.find(function (u) {
-            return u.username == req.query.username;
-        });
-        if(user) {
-            res.json(user);
-        } else {
-            res.sendStatus(404);
-        }*/
-
         userModel.findUserByUsername(username)
             .then(function (user) {
                 res.json(user);
@@ -70,11 +61,6 @@ module.exports = function(app, userModel) {
     function findUserByCredentials(req, res){
         var username = req.query.username;
         var password = req.query.password;
-        /*var user = users.find(function(user){
-            return user.password == password && user.username == username;
-        });
-        res.json(user);*/
-
         userModel.findUserByCreadentials(username, password)
             .then(function (user) {
                 res.json(user);
@@ -86,15 +72,6 @@ module.exports = function(app, userModel) {
     function updateUser(req, res) {
         var userId = req.params.userId;
         var newUser = req.body;
-      /*  for(var u in users) {
-            if( users[u]._id == userId ) {
-                users[u].firstName = newUser.firstName;
-                users[u].lastName = newUser.lastName;
-                users[u].email = newUser.email;
-                res.json(users[u]);
-                return;
-            }
-        }*/
         userModel.updateUser(userId, newUser)
             .then(function (user) {
                 res.json(user);
@@ -105,13 +82,11 @@ module.exports = function(app, userModel) {
 
     function deleteUser(req, res) {
         var userId = req.params.userId;
-        for(var u in users) {
-            if(users[u]._id == userId) {
-                users.splice(u, 1);
-                res.sendStatus(200);
-                return;
-            }
-        }
-        res.sendStatus(404);
+        userModel.deleteUser(userId)
+            .then(function (user) {
+                res.send(200);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
     }
 };
