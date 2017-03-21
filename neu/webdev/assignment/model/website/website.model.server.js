@@ -43,14 +43,48 @@ module.exports = function (mongoose, q) {
     }
     
     function findWebsiteById(websiteId) {
-        
+        var deferred = q.defer();
+
+        WebsiteModel.findById(websiteId, function (err, website) {
+            if(err){
+                console.log(err);
+                deferred.abort();
+            }
+            else {
+                deferred.resolve(website);
+            }
+        })
+        return deferred.promise;
     }
 
     function updateWebsite(websiteId, website) {
-        
+        var deferred = q.defer();
+
+        WebsiteModel.update({_id:websiteId},
+            {$set:website}
+            , function (err, website) {
+            if(err){
+                console.log(err);
+                deferred.abort();
+            }
+            else {
+                deferred.resolve(website);
+            }
+        })
+        return deferred.promise;
+
     }
 
     function deleteWebsite(websiteId) {
-        
+        var deferred = q.defer();
+        WebsiteModel.remove({_id: websiteId}, function (err, status) {
+            if(err){
+                deferred.abort();
+            }
+            else {
+                deferred.resolve();
+            }
+        })
+        return deferred.promise;
     }
 }
