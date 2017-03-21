@@ -16,12 +16,11 @@ module.exports = function (mongoose, q) {
         var deferred = q.defer();
         website._user = userId;
         WebsiteModel.create(website, function (err, doc) {
-
             if(err){
                 deferred.abort();
             }
             else {
-                deferred.resolve();
+                deferred.resolve(doc);
             }
         });
 
@@ -29,7 +28,18 @@ module.exports = function (mongoose, q) {
     }
     
     function findAllWebsitesForUser(userId) {
-        
+        var deferred = q.defer();
+
+        WebsiteModel.find({_user: userId}, function (err, websites) {
+            if(err){
+                deferred.abort();
+            }
+            else {
+                deferred.resolve(websites);
+            }
+        })
+
+        return deferred.promise;
     }
     
     function findWebsiteById(websiteId) {

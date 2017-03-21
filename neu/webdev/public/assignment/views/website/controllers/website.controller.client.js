@@ -22,7 +22,7 @@
         init();
     }
 
-    function NewWebsiteController($routeParams, WebsiteService, $location) {
+    function NewWebsiteController($routeParams, WebsiteService, $location, UserService) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.createWebsite = createWebsite;
@@ -37,12 +37,15 @@
         init();
 
         function createWebsite() {
-            vm.website._id = (new Date()).getTime();
+
             WebsiteService
                 .createWebsite(vm.userId, vm.website)
                 .then(function (website) {
                     vm.website = website.data;
-                    $location.url("/user/"+vm.userId+"/website");
+                    UserService.updateWebsite(vm.userId, vm.website._id)
+                        .then(function (status) {
+                            $location.url("/user/"+vm.userId+"/website");
+                        })
                 });
         }
     }

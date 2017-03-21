@@ -1,7 +1,7 @@
 /**
  * Created by raghu on 2/8/2017.
  */
-module.exports =  function(app) {
+module.exports =  function(app, WebsiteModel) {
     app.get("/api/user/:userId/website", findAllWebsitesForUser);
     app.get("/api/website/:websiteId", findWebsiteById);
     app.put("/api/website/:websiteId", updateWebsite);
@@ -19,20 +19,26 @@ module.exports =  function(app) {
 
     function createWebsite(req, res) {
         var newWebsite = req.body;
-        newWebsite.developerId = req.params.userId;
-        websites.push(newWebsite);
-        res.json(newWebsite)
+        userId = req.params.userId;
+
+        WebsiteModel.createWebsiteForUser(userId, newWebsite)
+            .then(function (website) {
+                res.json(website);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
+
     }
 
     function findAllWebsitesForUser(req, res) {
         var userId = req.params.userId;
-        var sites = [];
-        for(var w in websites) {
-            if(userId == websites[w].developerId) {
-                sites.push(websites[w]);
-            }
-        }
-        res.json(sites);
+
+        WebsiteModel.findAllWebsitesForUser(userId)
+            .then(function (websites) {
+                res.json(websites);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
     }
 
     function findWebsiteById(req, res) {

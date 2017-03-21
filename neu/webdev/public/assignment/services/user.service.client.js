@@ -13,7 +13,8 @@
             "findUserByUsername": findUserByUsername,
             "findUserByCredentials": findUserByCredentials,
             "updateUser": updateUser,
-            "deleteUser": deleteUser
+            "deleteUser": deleteUser,
+            "updateWebsite":updateWebsite
         };
         return api;
 
@@ -40,6 +41,11 @@
         function deleteUser(userId) {
             return $http.delete("/api/user/"+userId);
         }
+
+        function updateWebsite(userId, websiteId) {
+            return $http.put("/api/user/"+userId+"/website/"+websiteId);
+        }
+
     }
 
 })();

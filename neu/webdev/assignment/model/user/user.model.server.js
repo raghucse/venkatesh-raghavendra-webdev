@@ -9,7 +9,8 @@ module.exports = function (mongoose, q) {
         findUserByUsername: findUserByUsername,
         findUserByCreadentials: findUserByCreadentials,
         updateUser: updateUser,
-        deleteUser: deleteUser
+        deleteUser: deleteUser,
+        updateWebsite: updateWebsite
     };
 
     return api;
@@ -102,4 +103,21 @@ module.exports = function (mongoose, q) {
         })
         return deferred.promise;
     }
+
+    function updateWebsite(userId, websiteId) {
+        var deferred = q.defer();
+        UserModel.findById(userId, function (err, user) {
+            if(err){
+                console.log(err);
+                deferred.abort();
+            }
+            else {
+                user.websites.push(websiteId);
+                user.save();
+                deferred.resolve();
+            }
+        })
+        return deferred.promise;
+    }
+
 };
