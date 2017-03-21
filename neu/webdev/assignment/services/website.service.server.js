@@ -8,6 +8,8 @@ module.exports =  function(app, WebsiteModel) {
     app.delete("/api/website/:websiteId", deleteWebsite);
     app.post("/api/user/:userId/website", createWebsite);
 
+    app.put("/api/website/:websiteId/page/:pageId", updatePage);
+
     function createWebsite(req, res) {
         var newWebsite = req.body;
         userId = req.params.userId;
@@ -63,6 +65,18 @@ module.exports =  function(app, WebsiteModel) {
                 res.sendStatus(500).send(err);
             })
 
+    }
+
+    function updatePage(req, res) {
+        var websiteId = req.params.websiteId;
+        var pageId = req.params.pageId;
+
+        WebsiteModel.updatePage(websiteId, pageId)
+            .then(function (website) {
+                res.send(200);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
     }
 }
 

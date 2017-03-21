@@ -8,7 +8,8 @@ module.exports = function (mongoose, q) {
         findAllWebsitesForUser: findAllWebsitesForUser,
         findWebsiteById: findWebsiteById,
         updateWebsite: updateWebsite,
-        deleteWebsite: deleteWebsite
+        deleteWebsite: deleteWebsite,
+        updatePage: updatePage
     };
     return api;
 
@@ -82,6 +83,21 @@ module.exports = function (mongoose, q) {
                 deferred.abort();
             }
             else {
+                deferred.resolve();
+            }
+        })
+        return deferred.promise;
+    }
+
+    function updatePage(websiteId, pageId) {
+        var deferred = q.defer();
+        WebsiteModel.findById(websiteId, function (err, website) {
+            if(err){
+                deferred.abort();
+            }
+            else {
+                website.pages.push(pageId);
+                website.save();
                 deferred.resolve();
             }
         })

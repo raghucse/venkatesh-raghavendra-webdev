@@ -12,7 +12,8 @@
             "findWebsiteById": findWebsiteById,
             "updateWebsite": updateWebsite,
             "deleteWebsite": deleteWebsite,
-            "findAllWebsitesForUser": findAllWebsitesForUser
+            "findAllWebsitesForUser": findAllWebsitesForUser,
+            "updatePage": updatePage
         };
         return api;
 
@@ -34,6 +35,10 @@
 
         function deleteWebsite(websiteId) {
             return $http.delete("/api/website/"+websiteId);
+        }
+
+        function updatePage(websiteId, pageId) {
+            return $http.put("/api/website/"+websiteId+"/page/"+pageId);
         }
     }
 

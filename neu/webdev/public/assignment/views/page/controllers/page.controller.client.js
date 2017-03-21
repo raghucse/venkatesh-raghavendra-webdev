@@ -26,7 +26,7 @@
 
     }
 
-    function NewPageController($routeParams, PageService, $location) {
+    function NewPageController($routeParams, PageService, $location, WebsiteService) {
         var vm = this;
         vm.websiteId = $routeParams["wid"];
         vm.userId = $routeParams["uid"];
@@ -41,12 +41,15 @@
         init();
 
         function createPage() {
-            vm.page._id = (new Date()).getTime();
             PageService
                 .createPage(vm.websiteId, vm.page)
                 .then(function (page) {
                     vm.page = page.data;
-                    $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+                    WebsiteService
+                        .updatePage(vm.page._website, vm.page._id)
+                        .then(function (website) {
+                            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+                        })
                 });
         }
     }

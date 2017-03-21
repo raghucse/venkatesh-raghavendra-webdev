@@ -5,7 +5,7 @@
 /**
  * Created by raghu on 2/8/2017.
  */
-module.exports = function(app) {
+module.exports = function(app, PageModel) {
     app.get("/api/website/:websiteId/page", findAllPagesForWebsite);
     app.get("/api/page/:pageId", findPageById);
     app.put("/api/page/:pageId", updatePage);
@@ -20,20 +20,27 @@ module.exports = function(app) {
 
     function createPage(req, res){
         var newPage = req.body;
-        newPage.websiteId = req.params.websiteId;
-        pages.push(newPage);
-        res.json(newPage);
+        var websiteId = req.params.websiteId;
+
+        PageModel.createPage(websiteId, newPage)
+            .then(function (page) {
+                res.json(page);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
+
+
     }
 
     function findAllPagesForWebsite(req, res) {
         var websiteId = req.params.websiteId;
-        var allPages = [];
-        for (var i = 0; i < pages.length; i++) {
-            if (pages[i].websiteId == websiteId) {
-                allPages.push(pages[i]);
-            }
-        }
-        res.json(allPages);
+
+        PageModel.findAllPagesForWebsite(websiteId)
+            .then(function (pages) {
+                res.json(pages);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
     }
 
     function findPageById(req, res) {
