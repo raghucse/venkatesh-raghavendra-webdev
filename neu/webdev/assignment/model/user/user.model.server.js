@@ -20,7 +20,7 @@ module.exports = function (mongoose, q) {
 
         UserModel.create(user, function (err, doc) {
                 if(err){
-                    deferred.abort();
+                    deferred.reject(err);
                 }
                 else {
                     deferred.resolve(doc);
@@ -35,7 +35,7 @@ module.exports = function (mongoose, q) {
         UserModel.findById(userId, function (err, user) {
             if(err){
                 console.log(err);
-                deferred.abort();
+                deferred.reject(err);
             }
             else {
                 deferred.resolve(user);
@@ -49,7 +49,7 @@ module.exports = function (mongoose, q) {
 
         UserModel.find({username: username}, function (err, user) {
             if(err){
-                deferred.abort();
+                deferred.reject(err);
             }
             else {
                 deferred.resolve(user);
@@ -63,7 +63,7 @@ module.exports = function (mongoose, q) {
 
         UserModel.find({$and: [{username: username}, {password: password}]}, function (err, user) {
             if(err){
-                deferred.abort();
+                deferred.reject(err);
             }
             else {
                 deferred.resolve(user);
@@ -82,7 +82,7 @@ module.exports = function (mongoose, q) {
                 email: user.email
             }, function (err, user) {
                 if(err){
-                    deferred.abort();
+                    deferred.reject(err);
                 }
                 else {
                     deferred.resolve(user);
@@ -95,7 +95,7 @@ module.exports = function (mongoose, q) {
         var deferred = q.defer();
         UserModel.remove({_id: userId}, function (err, status) {
             if(err){
-                deferred.abort();
+                deferred.reject(err);
             }
             else {
                 deferred.resolve();
@@ -109,7 +109,7 @@ module.exports = function (mongoose, q) {
         UserModel.findById(userId, function (err, user) {
             if(err){
                 console.log(err);
-                deferred.abort();
+                deferred.reject(err);
             }
             else {
                 user.websites.push(websiteId);

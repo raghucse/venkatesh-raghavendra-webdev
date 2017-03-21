@@ -17,7 +17,7 @@ module.exports = function (mongoose, q) {
         page._website = websiteId;
         PageModel.create(page, function (err, doc) {
             if(err){
-                deferred.abort();
+                deferred.reject(err);
             }
             else {
                 deferred.resolve(doc);
@@ -31,7 +31,7 @@ module.exports = function (mongoose, q) {
 
         PageModel.find({_website: websiteId}, function (err, pages) {
             if(err){
-                deferred.abort();
+                deferred.reject(err);
             }
             else {
                 deferred.resolve(pages);
@@ -42,15 +42,47 @@ module.exports = function (mongoose, q) {
     }
 
     function findPageById(pageId) {
-        
+        var deferred = q.defer();
+
+        PageModel.findById(pageId, function (err, page) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(page);
+            }
+        })
+        return deferred.promise;
+
     }
 
     function updatePage(pageId, page) {
+        var deferred = q.defer();
 
+        PageModel.update({_id:pageId},
+            {$set:page}
+            , function (err, page) {
+                if(err){
+                    deferred.reject(err);
+                }
+                else {
+                    deferred.resolve(page);
+                }
+            })
+        return deferred.promise;
     }
 
     function deletePage(pageId) {
-
+        var deferred = q.defer();
+        PageModel.remove({_id: pageId}, function (err, status) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve();
+            }
+        })
+        return deferred.promise;
     }
 
 }

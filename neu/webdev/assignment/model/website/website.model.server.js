@@ -18,7 +18,7 @@ module.exports = function (mongoose, q) {
         website._user = userId;
         WebsiteModel.create(website, function (err, doc) {
             if(err){
-                deferred.abort();
+                deferred.reject(err);
             }
             else {
                 deferred.resolve(doc);
@@ -33,7 +33,7 @@ module.exports = function (mongoose, q) {
 
         WebsiteModel.find({_user: userId}, function (err, websites) {
             if(err){
-                deferred.abort();
+                deferred.reject(err);
             }
             else {
                 deferred.resolve(websites);
@@ -49,7 +49,7 @@ module.exports = function (mongoose, q) {
         WebsiteModel.findById(websiteId, function (err, website) {
             if(err){
                 console.log(err);
-                deferred.abort();
+                deferred.reject(err);
             }
             else {
                 deferred.resolve(website);
@@ -66,7 +66,7 @@ module.exports = function (mongoose, q) {
             , function (err, website) {
             if(err){
                 console.log(err);
-                deferred.abort();
+                deferred.reject(err);
             }
             else {
                 deferred.resolve(website);
@@ -80,7 +80,7 @@ module.exports = function (mongoose, q) {
         var deferred = q.defer();
         WebsiteModel.remove({_id: websiteId}, function (err, status) {
             if(err){
-                deferred.abort();
+                deferred.reject(err);
             }
             else {
                 deferred.resolve();
@@ -93,7 +93,7 @@ module.exports = function (mongoose, q) {
         var deferred = q.defer();
         WebsiteModel.findById(websiteId, function (err, website) {
             if(err){
-                deferred.abort();
+                deferred.reject(err);
             }
             else {
                 website.pages.push(pageId);

@@ -45,34 +45,34 @@ module.exports = function(app, PageModel) {
 
     function findPageById(req, res) {
         var pageId = req.params.pageId;
-        for (var i = 0; i < pages.length; i++) {
-            if (pages[i]._id == pageId) {
-                res.json(pages[i]);
-                return;
-            }
-        }
+
+        PageModel.findPageById(pageId)
+            .then(function (page) {
+                res.json(page);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
     }
 
     function updatePage(req, res) {
         var pageId = req.params.pageId;
         var page = req.body;
-        for (var i = 0; i < pages.length; i++) {
-            if (pages[i]._id == pageId) {
-                pages[i] = page;
-                res.json(pages[i]);
-                return;
-            }
-        }
+
+        PageModel.updatePage(pageId, page)
+            .then(function (page) {
+                res.json(page);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
     }
 
     function deletePage(req, res) {
         var pageId = req.params.pageId;
-        for (var i = 0; i < pages.length; i++) {
-            if (pages[i]._id == pageId) {
-                pages.splice(i, 1);
+        PageModel.deletePage(pageId)
+            .then(function (status) {
                 res.sendStatus(200);
-                return;
-            }
-        }
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
     }
 }
