@@ -48,6 +48,7 @@
         vm.newHeaderWidget = newHeaderWidget;
         vm.newImageWidget = newImageWidget;
         vm.newYouTubeWidget = newYouTubeWidget;
+        vm.newTextWidget = newTextWidget;
 
         function init() {
         }
@@ -97,6 +98,21 @@
                         })
                 });
         }
+
+        function newTextWidget() {
+            var textWidget ={"type": "TEXT", "rows": 5, "placeholder": "Insert text",
+                "formatted": "false" };
+            WidgetService
+                .createWidget(vm.pageId, textWidget)
+                .then(function (textWidget) {
+                    textWidget = textWidget.data;
+                    PageService.updateWidget(vm.pageId, textWidget._id)
+                        .then(function (page) {
+                            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+textWidget._id);
+                        })
+                });
+        }
+
     }
 
     function EditWidgetController(WidgetService, $location, $routeParams) {
