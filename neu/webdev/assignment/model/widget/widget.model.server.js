@@ -78,12 +78,14 @@ module.exports = function (mongoose, q) {
     
     function deleteWidget(widgetId) {
         var deferred = q.defer();
-        WidgetModel.remove({_id: widgetId}, function (err, status) {
+        WidgetModel.findById(widgetId, function (err, widget) {
             if(err){
                 deferred.reject(err);
             }
             else {
-                deferred.resolve();
+                widget.remove(function (err) {
+                    deferred.resolve();
+                });
             }
         })
         return deferred.promise;

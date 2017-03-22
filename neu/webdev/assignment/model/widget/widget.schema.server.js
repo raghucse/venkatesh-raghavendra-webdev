@@ -22,5 +22,16 @@ module.exports = function (mongoose) {
         dateCreated: Date
     }, {collection: 'assignment.widget'});
 
+
+
+    WidgetSchema.pre('remove', function(next) {
+        this.model('PageModel').update(
+            {_id: this._page},
+            {$pull: {widgets: this._id}},
+            {multi: true},
+            next
+        );
+    });
+
     return WidgetSchema;
 }
