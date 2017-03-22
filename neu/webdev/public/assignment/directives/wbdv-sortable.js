@@ -23,9 +23,6 @@
                     });
                     $http.put("/page/"+pageId+"/widget?initial=" + initialIndex + "&final="+ finalIndex, newMap);
                 }});
-
-
-
         }
         return {
             link: linkFunc
