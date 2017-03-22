@@ -67,6 +67,7 @@ module.exports = function(app, userModel) {
         var newUser = req.body;
         userModel.updateUser(userId, newUser)
             .then(function (user) {
+                console.log(user);
                 res.json(user);
             }, function (err) {
                 res.sendStatus(500).send(err);

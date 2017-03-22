@@ -25,11 +25,12 @@
         init();
 
         function update() {
+            var userSaved = vm.user;
             UserService
                 .updateUser(vm.userId, vm.user)
                 .then(function (user) {
-                    vm.user = user.data;
                     vm.message = "User successfully updated";
+                    vm.user = userSaved;
                 }, function (user) {
                     vm.error = "Unable to update user";
                 });
