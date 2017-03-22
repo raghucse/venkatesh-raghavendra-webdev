@@ -84,16 +84,23 @@
             UserService
                 .findUserByUsername(vm.user.username)
                 .then(function (user) {
-                    vm.error = "sorry that username is taken";
-                },function(user){
-                    UserService
-                        .createUser(vm.user)
-                        .then(function(user){
-                            user = user.data;
-                            $location.url('/user/' + user._id);
-                        }, function (user) {
-                            vm.error = 'sorry could not register';
-                        })
+                    user = user.data;
+                    if(user[0]) {
+                        vm.error = "sorry that username is taken";
+                    }
+                    else
+                    {
+                        UserService
+                            .createUser(vm.user)
+                            .then(function(user){
+                                user = user.data;
+                                $location.url('/user/' + user._id);
+                            }, function (err) {
+                                vm.error = 'sorry could not register';
+                            })
+                    }
+                },function(err){
+                    vm.error = 'sorry could not register';
                 })
         }
     }

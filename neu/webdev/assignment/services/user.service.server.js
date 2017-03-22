@@ -45,10 +45,7 @@ module.exports = function(app, userModel) {
         var username = req.query.username;
         userModel.findUserByUsername(username)
             .then(function (user) {
-                if(user[0])
                     res.json(user);
-                else
-                    res.sendStatus(500).send(err);
             }, function (err) {
                 res.sendStatus(500).send(err);
             })
