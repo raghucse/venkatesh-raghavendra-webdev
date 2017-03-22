@@ -17,6 +17,7 @@
             "findPageById": findPageById,
             "updatePage": updatePage,
             "deletePage": deletePage,
+            "updateWidget": updateWidget
         };
         return api;
 
@@ -38,6 +39,10 @@
 
         function deletePage(pageId) {
             return $http.delete("/api/page/"+pageId);
+        }
+
+        function updateWidget(pageId, widgetId) {
+            return $http.put("/api/page/"+pageId+"/widget/"+widgetId);
         }
     }
 

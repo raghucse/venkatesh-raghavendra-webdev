@@ -8,7 +8,8 @@ module.exports = function (mongoose, q) {
         findAllPagesForWebsite: findAllPagesForWebsite,
         findPageById: findPageById,
         updatePage: updatePage,
-        deletePage: deletePage
+        deletePage: deletePage,
+        updateWidget: updateWidget
     };
     return api;
     
@@ -74,11 +75,29 @@ module.exports = function (mongoose, q) {
 
     function deletePage(pageId) {
         var deferred = q.defer();
-        PageModel.remove({_id: pageId}, function (err, status) {
+        PageModel.findById(pageId, function (err, page) {
             if(err){
                 deferred.reject(err);
             }
             else {
+                page.remove(function (err) {
+                    deferred.resolve();
+                });
+
+            }
+        })
+        return deferred.promise;
+    }
+
+    function updateWidget(pageId, widgetId) {
+        var deferred = q.defer();
+        PageModel.findById(pageId, function (err, page) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                page.widgets.push(pageId);
+                page.save();
                 deferred.resolve();
             }
         })

@@ -14,26 +14,95 @@ module.exports = function (mongoose, q) {
     return api;
 
     function createWidget(pageId, widget) {
-        
+        var deferred = q.defer();
+        widget._page = pageId;
+
+        WidgetModel.create(widget, function (err, doc) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
     }
     
     function findAllWidgetsForPage(pageId) {
-        
+        var deferred = q.defer();
+
+        WidgetModel.find({_page: pageId}, function (err, widgets) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(widgets);
+            }
+        })
+
+        return deferred.promise;
     }
     
     function findWidgetById(widgetId) {
-        
+        var deferred = q.defer();
+
+        WidgetModel.findById(widgetId, function (err, widget) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(widget);
+            }
+        })
+        return deferred.promise;
     }
     
     function updateWidget(widgetId, widget) {
-        
+        var deferred = q.defer();
+
+        WidgetModel.update({_id:widgetId},
+            {$set:widget}
+            , function (err, widget) {
+                if(err){
+                    deferred.reject(err);
+                }
+                else {
+                    deferred.resolve(widget);
+                }
+            })
+        return deferred.promise;
+
     }
     
     function deleteWidget(widgetId) {
-        
+        var deferred = q.defer();
+        WidgetModel.remove({_id: widgetId}, function (err, status) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve();
+            }
+        })
+        return deferred.promise;
     }
 
-    function reorderWidget(pageId, start, end) {
+    function reorderWidget(pageId, newmap) {
+        var deferred = q.defer();
 
+        findAllWidgetsForPage(pageId)
+            .then(function (widgets) {
+                for (var i = 0; i < widgets.length; i++) {
+                        var id = widgets[i]._id;
+                        widgets[i].index = newmap[id];
+                        widgets[i].save();
+                }
+                deferred.resolve();
+
+            }, function (err) {
+                deferred.reject(err);
+            })
+
+        return deferred.promise;
     }
 }

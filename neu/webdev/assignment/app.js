@@ -10,13 +10,7 @@ module.exports = function(app) {
             process.env.MLAB_APP_NAME;
     }
 
- //   mongoose.connect(connectionString);
-
-    mongoose.connect(connectionString, function (err, db) {
-        if(err){
-            console.log(err);
-        }
-    });
+    mongoose.connect(connectionString);
 
     var model = require('./model/model.server.js')(mongoose);
 

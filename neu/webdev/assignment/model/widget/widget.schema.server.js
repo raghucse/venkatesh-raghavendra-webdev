@@ -13,10 +13,11 @@ module.exports = function (mongoose) {
         width: String,
         height: String,
         rows: Number,
-        sizes: Number,
+        size: Number,
         class: String,
         icon: String,
         deletable: Boolean,
+        index: Number,
         formatted: Boolean,
         dateCreated: Date
     }, {collection: 'assignment.widget'});

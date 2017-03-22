@@ -13,5 +13,20 @@ module.exports = function (mongoose) {
         dateCreated: Date
     }, {collection: 'assignment.user'});
 
+    UserSchema.pre('remove', function(next) {
+
+        this.model('WebsiteModel')
+            .find({_user: this._id }, function (err, websites) {
+                websites.forEach(function(website){
+                    website.remove(function(err){
+
+                    });
+                })
+            });
+
+       // this.model('WebsiteModel').remove({ _user: this._id }, next);'' +
+        next();
+    });
+
     return UserSchema;
 };

@@ -11,6 +11,7 @@ module.exports = function(app, PageModel) {
     app.put("/api/page/:pageId", updatePage);
     app.delete("/api/page/:pageId", deletePage);
     app.post("/api/website/:websiteId/page", createPage);
+    app.put("/api/page/:pageId/widget/:widgetId",updateWidget)
 
     var pages  = [
         { "_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem" },
@@ -71,6 +72,18 @@ module.exports = function(app, PageModel) {
         PageModel.deletePage(pageId)
             .then(function (status) {
                 res.sendStatus(200);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
+    }
+
+    function updateWidget(req, res) {
+        var widgetId = req.params.widgetId;
+        var pageId = req.params.pageId;
+
+        PageModel.updateWidget(pageId, widgetId)
+            .then(function (widget) {
+                res.send(200);
             }, function (err) {
                 res.sendStatus(500).send(err);
             })

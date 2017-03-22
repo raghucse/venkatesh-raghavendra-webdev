@@ -5,7 +5,7 @@
 /**
  * Created by raghu on 2/8/2017.
  */
-module.exports =  function(app) {
+module.exports =  function(app, WidgetModel) {
     var multer = require('multer');
     var upload = multer({ dest: __dirname+'/../../public/uploads' });
 
@@ -16,7 +16,7 @@ module.exports =  function(app) {
     app.put("/api/flickr/:widgetId", updateWidgetFlickr);
     app.delete("/api/widget/:widgetId", deleteWidget);
     app.post ("/api/upload", upload.single('myFile'), uploadImage);
-    app.put("/page/:pageId/widget", updateWidgetOrder);
+    app.put("/page/:pageId/widget", reorderWidget);
 
     var widgets  = [
         { "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": "2", "text": "GIZMODO", "index": "0"},
@@ -30,50 +30,52 @@ module.exports =  function(app) {
 
     function createWidget(req, res){
         var newWidget = req.body;
-        newWidget.pageId = req.params.pageId;
+        var pageId = req.params.pageId;
 
-        var count = 0;
-        for (var i = 0; i < widgets.length; i++) {
-            if (widgets[i].pageId == newWidget.pageId) {
-                count++;
-            }
-        }
-        newWidget.index = count;
-        widgets.push(newWidget);
-        res.json(newWidget);
+        WidgetModel.createWidget(pageId, newWidget)
+            .then(function (widget) {
+                res.json(widget);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
+
     }
 
     function findAllWidgetsForPage(req, res) {
         var pageId = req.params.pageId;
-        var allWidgets = [];
-        for (var i = 0; i < widgets.length; i++) {
-            if (widgets[i].pageId == pageId) {
-                allWidgets.push(widgets[i]);
-            }
-        }
-        res.json(allWidgets);
+
+        WidgetModel.findAllWidgetsForPage(pageId)
+            .then(function (widgets) {
+                res.json(widgets);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
+
     }
 
     function findWidgetById(req, res) {
         var widgetId = req.params.widgetId;
-        for (var i = 0; i < widgets.length; i++) {
-            if (widgets[i]._id == widgetId) {
-                res.json(widgets[i]);
-                return;
-            }
-        }
+
+        WidgetModel.findWidgetById(widgetId)
+            .then(function (widget) {
+                res.json(widget);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
+
     }
 
     function updateWidget(req, res) {
         var widgetId = req.params.widgetId;
         var widget = req.body;
-        for (var i = 0; i < widgets.length; i++) {
-            if (widgets[i]._id == widgetId) {
-                widgets[i] = widget;
-                res.json(widgets[i]);
-                return;
-            }
-        }
+
+        WidgetModel.updateWidget(widgetId, widget)
+            .then(function (widget) {
+                res.json(widget);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
+
     }
 
     function updateWidgetFlickr(req, res) {
@@ -90,13 +92,13 @@ module.exports =  function(app) {
 
     function deleteWidget(req, res) {
         var widgetId = req.params.widgetId;
-        for (var i = 0; i < widgets.length; i++) {
-            if (widgets[i]._id == widgetId) {
-                widgets.splice(i, 1);
+
+        WidgetModel.deleteWidget(widgetId)
+            .then(function (status) {
                 res.sendStatus(200);
-                return;
-            }
-        }
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
     }
 
     function uploadImage(req, res) {
@@ -127,16 +129,16 @@ module.exports =  function(app) {
     }
 
 
-    function updateWidgetOrder(req, res) {
+    function reorderWidget(req, res) {
         var pageId = req.params.pageId;
         var newmap = req.body;
-        for (var i = 0; i < widgets.length; i++) {
-            if(widgets[i].pageId === pageId) {
-                id = widgets[i]._id;
-                widgets[i].index = newmap[id];
-            }
-        }
-        res.sendStatus(200);
+
+        WidgetModel.reorderWidget(pageId, newmap)
+            .then(function (status) {
+                res.sendStatus(200);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
     }
 
 }

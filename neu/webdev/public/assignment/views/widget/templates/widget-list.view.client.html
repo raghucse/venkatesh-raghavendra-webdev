@@ -23,7 +23,7 @@
 <div class="container-fluid">
     <div wbdv-sortable>
         <div  ng-repeat="widget in model.widgets" id = "{{widget._id}}">
-            <div ng-switch="widget.widgetType">
+            <div ng-switch="widget.type">
                 <div class="jga-toolbar">
                     <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                         <span class="glyphicon glyphicon-cog"></span>

@@ -34,7 +34,6 @@ module.exports = function (mongoose, q) {
 
         UserModel.findById(userId, function (err, user) {
             if(err){
-                console.log(err);
                 deferred.reject(err);
             }
             else {
@@ -93,12 +92,14 @@ module.exports = function (mongoose, q) {
 
     function deleteUser(userId) {
         var deferred = q.defer();
-        UserModel.remove({_id: userId}, function (err, status) {
+        UserModel.findById(userId, function (err, user) {
             if(err){
                 deferred.reject(err);
             }
             else {
-                deferred.resolve();
+                user.remove(function (err) {
+                    deferred.resolve();
+                });
             }
         })
         return deferred.promise;
@@ -108,7 +109,6 @@ module.exports = function (mongoose, q) {
         var deferred = q.defer();
         UserModel.findById(userId, function (err, user) {
             if(err){
-                console.log(err);
                 deferred.reject(err);
             }
             else {

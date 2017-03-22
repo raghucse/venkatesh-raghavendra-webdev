@@ -40,7 +40,7 @@
 
     }
 
-    function NewWidgetController($routeParams, $location, WidgetService) {
+    function NewWidgetController($routeParams, $location, WidgetService, PageService) {
         var vm = this;
         vm.userId = $routeParams['uid'];
         vm.websiteId = $routeParams['wid'];
@@ -54,36 +54,47 @@
         init();
 
         function newHeaderWidget() {
-            var headerWidget ={"widgetType": "HEADER", "size": 2, "text": "New Header"};
-            headerWidget._id = (new Date()).getTime();
+            var headerWidget ={"type": "HEADER", "size": 2, "text": "New Header"};
             WidgetService
                 .createWidget(vm.pageId, headerWidget)
-                .then(function (newWidget) {
-                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+headerWidget._id);
+                .then(function (headerWidget) {
+                    headerWidget = headerWidget.data;
+                    var widgetId = headerWidget._id;
+                    PageService.updateWidget(vm.pageId, widgetId)
+                        .then(function (page) {
+                            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+headerWidget._id);
+                        })
                 });
-
         }
 
         function newImageWidget() {
-            var imageWidget = {"widgetType": "IMAGE", "width": "100%",
+            var imageWidget = {"type": "IMAGE", "width": "100%",
                 "url": "http://lorempixel.com/400/200/"};
-            imageWidget._id = (new Date()).getTime();;
             WidgetService
                 .createWidget(vm.pageId, imageWidget)
-                .then(function (newWidget) {
-                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+imageWidget._id);
+                .then(function (imageWidget) {
+                    imageWidget = imageWidget.data;
+                    var widgetId = imageWidget._id;
+                    PageService.updateWidget(vm.pageId, widgetId)
+                        .then(function (doc) {
+                            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+imageWidget._id);
+                        })
                 });
 
         }
 
         function newYouTubeWidget() {
-            var youTubeWidget ={"widgetType": "YOUTUBE", "width": "100%",
+            var youTubeWidget ={"type": "YOUTUBE", "width": "100%",
                 "url": "https://youtu.be/AM2Ivdi9c4E" };
-            youTubeWidget._id = (new Date()).getTime();
             WidgetService
                 .createWidget(vm.pageId, youTubeWidget)
-                .then(function (newWidget) {
-                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+youTubeWidget._id);
+                .then(function (youTubeWidget) {
+                    youTubeWidget = youTubeWidget.data;
+                    var widgetId = youTubeWidget._id;
+                    PageService.updateWidget(vm.pageId, widgetId)
+                        .then(function (page) {
+                            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+youTubeWidget._id);
+                        })
                 });
         }
     }

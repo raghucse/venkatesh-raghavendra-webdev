@@ -48,7 +48,6 @@ module.exports = function (mongoose, q) {
 
         WebsiteModel.findById(websiteId, function (err, website) {
             if(err){
-                console.log(err);
                 deferred.reject(err);
             }
             else {
@@ -65,7 +64,6 @@ module.exports = function (mongoose, q) {
             {$set:website}
             , function (err, website) {
             if(err){
-                console.log(err);
                 deferred.reject(err);
             }
             else {
@@ -78,12 +76,14 @@ module.exports = function (mongoose, q) {
 
     function deleteWebsite(websiteId) {
         var deferred = q.defer();
-        WebsiteModel.remove({_id: websiteId}, function (err, status) {
+        WebsiteModel.findById(websiteId, function (err, website) {
             if(err){
                 deferred.reject(err);
             }
             else {
-                deferred.resolve();
+                website.remove(function (err) {
+                    deferred.resolve();
+                });
             }
         })
         return deferred.promise;
