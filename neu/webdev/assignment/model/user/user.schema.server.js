@@ -23,8 +23,6 @@ module.exports = function (mongoose) {
                     });
                 })
             });
-
-       // this.model('WebsiteModel').remove({ _user: this._id }, next);'' +
         next();
     });
 

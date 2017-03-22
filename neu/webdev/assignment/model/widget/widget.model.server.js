@@ -9,7 +9,8 @@ module.exports = function (mongoose, q) {
         findWidgetById: findWidgetById,
         updateWidget: updateWidget,
         deleteWidget: deleteWidget,
-        reorderWidget: reorderWidget
+        reorderWidget: reorderWidget,
+        uploadImage: uploadImage
     };
     return api;
 
@@ -103,6 +104,25 @@ module.exports = function (mongoose, q) {
                 deferred.reject(err);
             })
 
+        return deferred.promise;
+    }
+
+    function uploadImage(widgetId, width, serverPath) {
+
+        var deferred = q.defer();
+        WidgetModel.update(
+            { _id : widgetId },
+            {
+                width: width,
+                url: serverPath,
+            }, function (err, user) {
+                if(err){
+                    deferred.reject(err);
+                }
+                else {
+                    deferred.resolve(user);
+                }
+            })
         return deferred.promise;
     }
 }

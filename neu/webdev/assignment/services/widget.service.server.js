@@ -118,14 +118,12 @@ module.exports =  function(app, WidgetModel) {
         var mimetype      = myFile.mimetype;
         var serverPath = "../../../../../uploads/"+filename;
 
-        for (var i = 0; i < widgets.length; i++) {
-            if (widgets[i]._id == widgetId) {
-                widgets[i].width = width;
-                widgets[i].url = serverPath
+        WidgetModel.uploadImage(widgetId, width, serverPath)
+            .then(function (status) {
                 res.redirect("/assignment/index.html#/user/"+userId+ "/website/"+websiteId+"/page/"+pageId+"/widget");
-                return;
-            }
-        }
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
     }
 
 
