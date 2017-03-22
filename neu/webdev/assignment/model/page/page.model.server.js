@@ -96,7 +96,7 @@ module.exports = function (mongoose, q) {
                 deferred.reject(err);
             }
             else {
-                page.widgets.push(pageId);
+                page.widgets.push(widgetId);
                 page.save();
                 deferred.resolve();
             }
