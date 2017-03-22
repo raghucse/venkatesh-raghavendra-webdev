@@ -10,7 +10,8 @@ module.exports = function (mongoose, q) {
         updateWidget: updateWidget,
         deleteWidget: deleteWidget,
         reorderWidget: reorderWidget,
-        uploadImage: uploadImage
+        uploadImage: uploadImage,
+        updateWidgetFlickr: updateWidgetFlickr
     };
     return api;
 
@@ -115,6 +116,23 @@ module.exports = function (mongoose, q) {
             {
                 width: width,
                 url: serverPath,
+            }, function (err, user) {
+                if(err){
+                    deferred.reject(err);
+                }
+                else {
+                    deferred.resolve(user);
+                }
+            })
+        return deferred.promise;
+    }
+
+    function updateWidgetFlickr(widgetId, url) {
+        var deferred = q.defer();
+        WidgetModel.update(
+            { _id : widgetId },
+            {
+                url: url,
             }, function (err, user) {
                 if(err){
                     deferred.reject(err);

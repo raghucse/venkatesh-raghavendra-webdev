@@ -18,16 +18,6 @@ module.exports =  function(app, WidgetModel) {
     app.post ("/api/upload", upload.single('myFile'), uploadImage);
     app.put("/page/:pageId/widget", reorderWidget);
 
-    var widgets  = [
-        { "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": "2", "text": "GIZMODO", "index": "0"},
-        { "_id": "234", "widgetType": "HEADER", "pageId": "321", "size": "4", "text": "Lorem ipsum", "index": "1"},
-        { "_id": "345", "widgetType": "IMAGE", "pageId": "321", "width": "100%","url": "http://lorempixel.com/400/200/", "index": "2"},
-        { "_id": "456", "widgetType": "HTML", "pageId": "321", "text": "Lorem ipsum", "index": "3"},
-        { "_id": "567", "widgetType": "HEADER", "pageId": "321", "size": "4", "text": "Lorem ipsum", "index": "4"},
-        { "_id": "678", "widgetType": "YOUTUBE", "pageId": "321", "width": "100%","url": "https://youtu.be/AM2Ivdi9c4E", "index": "5"},
-        { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "Lorem ipsum", "index": "6"}
-    ]
-
     function createWidget(req, res){
         var newWidget = req.body;
         var pageId = req.params.pageId;
@@ -81,13 +71,12 @@ module.exports =  function(app, WidgetModel) {
     function updateWidgetFlickr(req, res) {
         var widgetId = req.params.widgetId;
         var link = req.body;
-        for (var i = 0; i < widgets.length; i++) {
-            if (widgets[i]._id == widgetId) {
-                widgets[i].url = link.url;
+        WidgetModel.updateWidgetFlickr(widgetId, link.url)
+            .then(function (status) {
                 res.sendStatus(200);
-                return;
-            }
-        }
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
     }
 
     function deleteWidget(req, res) {
