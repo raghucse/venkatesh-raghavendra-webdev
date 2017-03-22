@@ -49,6 +49,7 @@
         vm.newImageWidget = newImageWidget;
         vm.newYouTubeWidget = newYouTubeWidget;
         vm.newTextWidget = newTextWidget;
+        vm.newHTMLWidget = newHTMLWidget;
 
         function init() {
         }
@@ -109,6 +110,19 @@
                     PageService.updateWidget(vm.pageId, textWidget._id)
                         .then(function (page) {
                             $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+textWidget._id);
+                        })
+                });
+        }
+
+        function newHTMLWidget() {
+            var HTMLWidget ={"type": "HTML", "text": "sample text"};
+            WidgetService
+                .createWidget(vm.pageId, HTMLWidget)
+                .then(function (HTMLWidget) {
+                    HTMLWidget = HTMLWidget.data;
+                    PageService.updateWidget(vm.pageId, HTMLWidget._id)
+                        .then(function (page) {
+                            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+HTMLWidget._id);
                         })
                 });
         }
