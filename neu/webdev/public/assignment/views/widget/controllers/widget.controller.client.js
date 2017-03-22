@@ -56,7 +56,7 @@
         init();
 
         function newHeaderWidget() {
-            var headerWidget ={"type": "HEADER", "size": 2, "text": "New Header"};
+            var headerWidget ={"type": "HEADING", "size": 2, "text": "New Heading"};
             WidgetService
                 .createWidget(vm.pageId, headerWidget)
                 .then(function (headerWidget) {
