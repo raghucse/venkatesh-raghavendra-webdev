@@ -101,7 +101,7 @@
         }
 
         function newTextWidget() {
-            var textWidget ={"type": "TEXT", "rows": 5, "placeholder": "Insert text",
+            var textWidget ={"type": "INPUT", "rows": 5, "placeholder": "Insert text",
                 "formatted": "false" };
             WidgetService
                 .createWidget(vm.pageId, textWidget)
