@@ -11,12 +11,21 @@
             "createUser": createUser,
             "findUserById": findUserById,
             "findUserByUsername": findUserByUsername,
+            "login": login,
             "findUserByCredentials": findUserByCredentials,
             "updateUser": updateUser,
             "deleteUser": deleteUser,
             "updateWebsite":updateWebsite
         };
         return api;
+
+        function login(username, password) {
+            return $http.post("/api/login?username="+username+"&password="+password);
+        }
+
+        function logout() {
+            return $http.post("/api/logout");
+        }
 
         function createUser(newUser) {
             return $http.post("/api/user", newUser);

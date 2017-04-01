@@ -36,6 +36,14 @@
                 });
         }
 
+        function logout($location) {
+            UserService
+                .logout()
+                .then(function (status) {
+                    $location.url("/login");
+                })
+        }
+
         function deleteUser(user) {
             var cfrm = confirm("Are you sure that you want to delete?")
             if(cfrm){
@@ -61,7 +69,7 @@
 
         function login(user) {
             var promise = UserService
-                .findUserByCredentials(user.username, user.password);
+                .login(user.username, user.password);
             promise.then(function(user){
                 user = user.data;
                 if(user[0]) {
