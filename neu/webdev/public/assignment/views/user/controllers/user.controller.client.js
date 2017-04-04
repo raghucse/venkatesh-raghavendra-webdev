@@ -15,6 +15,7 @@
         vm.userId = $routeParams["uid"];
         vm.update =  update;
         vm.deleteUser = deleteUser;
+        vm.logout = logout;
 
         function init() {
             var promise = UserService.findUserById(vm.userId);
@@ -36,7 +37,7 @@
                 });
         }
 
-        function logout($location) {
+        function logout() {
             UserService
                 .logout()
                 .then(function (status) {

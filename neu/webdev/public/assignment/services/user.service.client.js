@@ -12,6 +12,7 @@
             "findUserById": findUserById,
             "findUserByUsername": findUserByUsername,
             "login": login,
+            "logout":logout,
             "findUserByCredentials": findUserByCredentials,
             "updateUser": updateUser,
             "deleteUser": deleteUser,

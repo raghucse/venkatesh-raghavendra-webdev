@@ -6,17 +6,17 @@ module.exports = function(app, userModel) {
     var passport      = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
     passport.use(new LocalStrategy(localStrategy));
+
     var auth = authorized;
 
     app.post('/api/login', passport.authenticate('local'), login);
     app.post('/api/logout',logout);
-  //  app.post('/api/register',register);
     app.get('/api/loggedin',loggedin);
     app.get("/api/user", findUser);
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
     app.delete("/api/user/:userId", auth, deleteUser);
-    app.post("/api/user", createUser);
+    app.post("/api/user", auth, createUser);
 
     app.put("/api/user/:userId/website/:websiteId", updateWebsite);
 
