@@ -16,6 +16,7 @@
             "findUserByCredentials": findUserByCredentials,
             "updateUser": updateUser,
             "deleteUser": deleteUser,
+            "register": register,
             "updateWebsite":updateWebsite
         };
         return api;
@@ -26,6 +27,10 @@
 
         function logout() {
             return $http.post("/api/logout");
+        }
+
+        function register(user) {
+            return $http.post("/api/register", user);
         }
 
         function createUser(newUser) {

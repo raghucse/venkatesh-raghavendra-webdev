@@ -12,6 +12,8 @@ module.exports = function(app, userModel) {
     app.post('/api/login', passport.authenticate('local'), login);
     app.post('/api/logout',logout);
     app.get('/api/loggedin',loggedin);
+    app.post ('/api/register', register);
+
     app.get("/api/user", findUser);
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
@@ -59,6 +61,25 @@ module.exports = function(app, userModel) {
                     done(err, null);
                 }
             );
+    }
+
+    function register (req, res) {
+        var user = req.body;
+        userModel
+            .createUser(user)
+            .then(
+            function(user){
+                if(user){
+                    req.login(user, function(err) {
+                        if(err) {
+                            res.status(400).send(err);
+                        } else {
+                            res.json(user);
+                        }
+                    });
+                }
+            }
+        );
     }
 
     function login(req, res) {

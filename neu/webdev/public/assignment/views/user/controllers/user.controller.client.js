@@ -80,6 +80,7 @@
                 }
             });
         }
+
     }
 
     function RegisterController(UserService, $location) {
@@ -101,7 +102,7 @@
                     else
                     {
                         UserService
-                            .createUser(vm.user)
+                            .register(vm.user)
                             .then(function(user){
                                 user = user.data;
                                 $location.url('/user/' + user._id);
