@@ -12,6 +12,7 @@ module.exports = function(app, userModel) {
         callbackURL  : process.env.FACEBOOK_CALLBACK_URL,
         profileFields: ['id', 'displayName', 'name', 'email']
     };
+    var bcrypt = require("bcrypt-nodejs");
 
     passport.use(new LocalStrategy(localStrategy));
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
@@ -85,11 +86,14 @@ module.exports = function(app, userModel) {
 
 
     function localStrategy(username, password, done) {
-        userModel.findUserByCreadentials(username, password)
+        userModel.findUserByUsername(username)
             .then(
                 function(user) {
-                    if (!user) { return done(null, false); }
-                    return done(null, user);
+                    if(user[0] && bcrypt.compareSync(password, user[0].password)) {
+                        return done(null, user);
+                    } else {
+                        return done(null, false);
+                    }
                 },
                 function(err) {
                     if (err) { return done(err); }
@@ -135,6 +139,7 @@ module.exports = function(app, userModel) {
 
     function register (req, res) {
         var user = req.body;
+        user.password = bcrypt.hashSync(user.password);
         userModel
             .createUser(user)
             .then(
