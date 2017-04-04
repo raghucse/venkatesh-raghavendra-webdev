@@ -74,7 +74,7 @@
             promise.then(function(user){
                 user = user.data;
                 if(user[0]) {
-                    $location.url("/user/"+user[0]._id);
+                    $location.url("/user/"+user[0]._id, user);
                 } else {
                     vm.error = "User not found";
                 }

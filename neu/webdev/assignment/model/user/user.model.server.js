@@ -10,10 +10,24 @@ module.exports = function (mongoose, q) {
         findUserByCreadentials: findUserByCreadentials,
         updateUser: updateUser,
         deleteUser: deleteUser,
-        updateWebsite: updateWebsite
+        updateWebsite: updateWebsite,
+        findUserByFacebookId: findUserByFacebookId,
     };
 
     return api;
+
+    function findUserByFacebookId(facebookId) {
+        var deferred = q.defer();
+        UserModel.findOne({'facebook.id': facebookId},function (err, doc) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
+    }
 
     function createUser(user) {
         var deferred = q.defer();

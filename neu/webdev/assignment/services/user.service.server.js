@@ -5,22 +5,37 @@ module.exports = function(app, userModel) {
 
     var passport      = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
+    var FacebookStrategy = require('passport-facebook').Strategy;
+    var facebookConfig = {
+        clientID     : process.env.FACEBOOK_CLIENT_ID,
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL,
+        profileFields: ['id', 'displayName', 'name', 'email']
+    };
+
     passport.use(new LocalStrategy(localStrategy));
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
     var auth = authorized;
 
     app.post('/api/login', passport.authenticate('local'), login);
+    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     app.post('/api/logout',logout);
     app.get('/api/loggedin',loggedin);
     app.post ('/api/register', register);
-
     app.get("/api/user", findUser);
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
-    app.delete("/api/user/:userId", auth, deleteUser);
-    app.post("/api/user", auth, createUser);
-
+    app.delete("/api/user/:userId",deleteUser);
+    app.post("/api/user",createUser);
     app.put("/api/user/:userId/website/:websiteId", updateWebsite);
+
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            failureRedirect: '/'
+        }), function (req, res) {
+            res.redirect('/assignment/#/user/' + req.user._id);
+        });
 
     function authorized (req, res, next) {
         if (!req.isAuthenticated()) {
@@ -29,6 +44,45 @@ module.exports = function(app, userModel) {
             next();
         }
     }
+
+    function facebookStrategy(token, refreshToken, profile, done) {
+        userModel
+            .findUserByFacebookId(profile.id)
+            .then(
+                function(user) {
+                    if(user) {
+
+                        return done(null, user);
+                    } else {
+                        var email = profile.emails[0].value;
+                        var emailParts = email.split("@");
+                        var newFacebookUser = {
+                            username:  emailParts[0],
+                            firstName: profile.name.givenName,
+                            lastName:  profile.name.familyName,
+                            email:    email,
+                            facebook: {
+                                id:    profile.id,
+                                token: token
+                            }
+                        };
+                        return userModel.createUser(newFacebookUser);
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            )
+            .then(
+                function(user){
+                    return done(null, user);
+                },
+                function(err){
+                    if (err) { return done(err); }
+                }
+            );
+    }
+
 
     function localStrategy(username, password, done) {
         userModel.findUserByCreadentials(username, password)
@@ -51,16 +105,32 @@ module.exports = function(app, userModel) {
     }
 
     function deserializeUser(user, done) {
-        userModel
-            .findUserById(user._id)
-            .then(
-                function(user){
-                    done(null, user);
-                },
-                function(err){
-                    done(err, null);
-                }
-            );
+        if(user[0]){
+            userModel
+                .findUserById(user[0]._id)
+                .then(
+                    function(user){
+                        done(null, user);
+                    },
+                    function(err){
+                        done(err, null);
+                    }
+                );
+        }
+        else
+        {
+            userModel
+                .findUserById(user._id)
+                .then(
+                    function(user){
+                        done(null, user);
+                    },
+                    function(err){
+                        done(err, null);
+                    }
+                );
+        }
+
     }
 
     function register (req, res) {

@@ -10,7 +10,11 @@ module.exports = function (mongoose) {
         email: String,
         phone: String,
         websites: [{type: mongoose.Schema.Types.ObjectId, ref: 'WebsiteModel'}],
-        dateCreated: Date
+        dateCreated: Date,
+        facebook: {
+            id:    String,
+            token: String
+        }
     }, {collection: 'assignment.user'});
 
     UserSchema.pre('remove', function(next) {
