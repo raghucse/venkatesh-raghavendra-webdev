@@ -69,6 +69,12 @@
     </div>
 
     <div class="col-sm-8 col-xs-12 wbdv-right-pane">
+        <div ng-show="form.$invalid && form.$submitted" class="alert alert-danger">
+            Please fix below errors
+            <ul>
+                <li ng-show="form.name.$invalid && form.$submitted">Website name is required</li>
+            </ul>
+        </div>
         <form name="form" novalidate>
             <label for="new-web-name" class="form-control-label">Name</label>
             <input name="name" ng-model="model.website.name"

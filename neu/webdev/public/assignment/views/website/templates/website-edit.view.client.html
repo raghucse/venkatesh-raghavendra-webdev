@@ -23,7 +23,7 @@
                 <label>Edit Website</label>
             </a>
             <div class="navbar-text pull-right">
-                <a href="" ng-click="model.updateWebsite()" class="navbar-link">
+                <a href="" ng-click="form.$submitted=true; model.updateWebsite()" class="navbar-link">
                       <span class="glyphicon glyphicon-ok">
                       </span>
                 </a>
@@ -41,7 +41,7 @@
                 <label>Edit Website</label>
             </a>
             <div class="navbar-text pull-right">
-                <a href="" ng-click="model.updateWebsite()" class="navbar-link">
+                <a href="" ng-click="form.$submitted=true; model.updateWebsite()" class="navbar-link">
                       <span class="glyphicon glyphicon-ok">
                       </span>
                 </a>
@@ -71,9 +71,24 @@
 
 
         <div class="col-sm-8 col-xs-12 wbdv-right-pane">
-            <div class="top-padding form-group">
-                <label for="new-web-name" class="form-control-label">Website Name</label>
-                <input ng-model="model.website.name" placeholder="Website Name" id="new-web-name" class="form-control" type="text" value="Blogger">
+            <div ng-show="form.$invalid && form.$submitted" class="alert alert-danger">
+                Please fix below errors
+                <ul>
+                    <li ng-show="form.name.$invalid && form.$submitted">Website name is required</li>
+                </ul>
+            </div>
+            <div class="top-padding">
+                <form name="form" novalidate>
+                    <label for="new-web-name" class="form-control-label">Website Name</label>
+                    <input name="name" ng-model="model.website.name"
+                           type="text"
+                           id="new-web-name"
+                           class="form-control"
+                           placeholder="Web Sitename" required/>
+                    <div class="error" ng-show="form.name.$invalid && form.$submitted">
+                     Webdite Name is required
+                    </div>
+                </form>
             </div>
             <div class="form-group">
                 <label for="new-web-description" class="form-control-label">Website Description</label>

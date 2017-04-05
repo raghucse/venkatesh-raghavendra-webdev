@@ -37,17 +37,17 @@
         init();
 
         function createWebsite() {
-         if(vm.website && vm.website.name) {
-             WebsiteService
-                 .createWebsite(vm.userId, vm.website)
-                 .then(function (website) {
-                     vm.website = website.data;
-                     UserService.updateWebsite(vm.userId, vm.website._id)
-                         .then(function (status) {
-                             $location.url("/user/" + vm.userId + "/website");
-                         })
-                 });
-         }
+            if(vm.website && vm.website.name) {
+                WebsiteService
+                    .createWebsite(vm.userId, vm.website)
+                    .then(function (website) {
+                        vm.website = website.data;
+                        UserService.updateWebsite(vm.userId, vm.website._id)
+                            .then(function (status) {
+                                $location.url("/user/" + vm.userId + "/website");
+                            })
+                    });
+            }
         }
     }
 
@@ -81,15 +81,18 @@
                 });
         }
 
-        function updateWebsite() {
-            WebsiteService
-                .updateWebsite(vm.websiteId, vm.website)
-                .then(function (website) {
-                    vm.website = website.data;
-                    $location.url("/user/"+vm.userId+"/website");
-                });
 
+        function updateWebsite() {
+            if(vm.website && vm.website.name) {
+                WebsiteService
+                    .updateWebsite(vm.websiteId, vm.website)
+                    .then(function (website) {
+                        vm.website = website.data;
+                        $location.url("/user/" + vm.userId + "/website");
+                    });
+            }
         }
+
     }
 
 
