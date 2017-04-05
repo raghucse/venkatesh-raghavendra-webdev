@@ -78,7 +78,10 @@
                 } else {
                     vm.error = "User not found";
                 }
-            });
+            })
+             .catch(function (err) {
+                    vm.error = "User not found";
+             });
         }
 
     }
