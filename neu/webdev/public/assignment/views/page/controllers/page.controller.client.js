@@ -88,13 +88,14 @@
         }
 
         function updatePage() {
-            PageService
-                .updatePage(vm.pageId, vm.page)
-                .then(function (page) {
-                    vm.page = page.data;
-                    $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
-                });
-
+            if(vm.page && vm.page.name){
+                PageService
+                    .updatePage(vm.pageId, vm.page)
+                    .then(function (page) {
+                        vm.page = page.data;
+                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+                    });
+            }
         }
     }
 })();
