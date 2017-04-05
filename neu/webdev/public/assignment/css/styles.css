@@ -19,6 +19,15 @@ body {
     color: #777;
 }
 
+.error{
+     color: #ff6929;
+     margin: 10px;
+ }
+
+.ng-submitted .ng-invalid{
+     background-color : #ebebeb;
+ }
+
 .blue-nav {
     color: #337ab7;
 }

@@ -69,19 +69,21 @@
         init();
 
         function login(user) {
-            var promise = UserService
-                .login(user.username, user.password);
-            promise.then(function(user){
-                user = user.data;
-                if(user[0]) {
-                    $location.url("/user/"+user[0]._id, user);
-                } else {
-                    vm.error = "User not found";
-                }
-            })
-             .catch(function (err) {
-                    vm.error = "User not found";
-             });
+            if (user && user.username && user.password) {
+                var promise = UserService
+                    .login(user.username, user.password);
+                promise.then(function (user) {
+                    user = user.data;
+                    if (user[0]) {
+                        $location.url("/user/" + user[0]._id, user);
+                    } else {
+                        vm.error = "User not found";
+                    }
+                })
+                    .catch(function (err) {
+                        vm.error = "User not found";
+                    });
+            }
         }
 
     }
@@ -94,28 +96,35 @@
         }
         init();
 
-        function register() {
-            UserService
-                .findUserByUsername(vm.user.username)
-                .then(function (user) {
-                    user = user.data;
-                    if(user[0]) {
-                        vm.error = "sorry that username is taken";
-                    }
-                    else
-                    {
-                        UserService
-                            .register(vm.user)
-                            .then(function(user){
-                                user = user.data;
-                                $location.url('/user/' + user._id);
-                            }, function (err) {
-                                vm.error = 'sorry could not register';
-                            })
-                    }
-                },function(err){
-                    vm.error = 'sorry could not register';
-                })
+        function register(user) {
+            if(user && user.username && user.password) {
+                if(user.password === user.verifypassword) {
+                    UserService
+                        .findUserByUsername(vm.user.username)
+                        .then(function (user) {
+                            user = user.data;
+                            if (user[0]) {
+                                vm.error = "sorry that username is taken";
+                            }
+                            else {
+                                UserService
+                                    .register(vm.user)
+                                    .then(function (user) {
+                                        user = user.data;
+                                        $location.url('/user/' + user._id);
+                                    }, function (err) {
+                                        vm.error = 'sorry could not register';
+                                    })
+                            }
+                        }, function (err) {
+                            vm.error = 'sorry could not register';
+                        })
+                }
+                else
+                {
+                    vm.passwordError = "Password does not match";
+                }
+            }
         }
     }
 })();
