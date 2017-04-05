@@ -23,7 +23,7 @@
                 <label>New Website</label>
             </a>
             <div class="navbar-text pull-right">
-                <a href="" ng-click="model.createWebsite()" class="navbar-link">
+                <a href="" ng-click="form.$submitted=true; model.createWebsite()" class="navbar-link">
                       <span class="glyphicon glyphicon-ok">
                       </span>
                 </a>
@@ -41,7 +41,7 @@
                 <label>New Website</label>
             </a>
             <div class="navbar-text pull-right">
-                <a href="" ng-click="model.createWebsite()" class="navbar-link">
+                <a href="" ng-click="form.$submitted=true; model.createWebsite()" class="navbar-link">
                       <span class="glyphicon glyphicon-ok">
                       </span>
                 </a>
@@ -69,14 +69,17 @@
     </div>
 
     <div class="col-sm-8 col-xs-12 wbdv-right-pane">
-      <div id="newNAme" class="form-group">
-        <label for="new-web-name" class="form-control-label">Name</label>
-        <input ng-model="model.website.name"
-               id="new-web-name"
-               class="form-control"
-               type="text"
-               placeholder="Name">
-      </div>
+        <form name="form" novalidate>
+            <label for="new-web-name" class="form-control-label">Name</label>
+            <input name="name" ng-model="model.website.name"
+                   type="text"
+                   id="new-web-name"
+                   class="form-control"
+                   placeholder="Web Sitename" required/>
+            <div class="error" ng-show="form.name.$invalid && form.$submitted">
+                Name is required
+            </div>
+        </form>
         <div class="form-group">
             <label for="new-web-description" class="form-control-label">Description</label>
             <textarea ng-model="model.website.description"

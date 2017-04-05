@@ -37,16 +37,17 @@
         init();
 
         function createWebsite() {
-
-            WebsiteService
-                .createWebsite(vm.userId, vm.website)
-                .then(function (website) {
-                    vm.website = website.data;
-                    UserService.updateWebsite(vm.userId, vm.website._id)
-                        .then(function (status) {
-                            $location.url("/user/"+vm.userId+"/website");
-                        })
-                });
+         if(vm.website && vm.website.name) {
+             WebsiteService
+                 .createWebsite(vm.userId, vm.website)
+                 .then(function (website) {
+                     vm.website = website.data;
+                     UserService.updateWebsite(vm.userId, vm.website._id)
+                         .then(function (status) {
+                             $location.url("/user/" + vm.userId + "/website");
+                         })
+                 });
+         }
         }
     }
 
