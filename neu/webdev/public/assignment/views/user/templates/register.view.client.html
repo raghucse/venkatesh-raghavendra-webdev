@@ -8,6 +8,15 @@
         <div ng-show="model.message" class="alert alert-info">
             {{model.message}}
         </div>
+        <div ng-show="form.$invalid && form.$submitted" class="alert alert-danger">
+            Please fix below errors
+            <ul>
+                <li ng-show="form.username.$invalid && form.$submitted">Username is required</li>
+                <li ng-show="form.password.$invalid && form.$submitted">Password is required</li>
+                <li ng-show="form.verifypassword.$invalid && form.$submitted">Confirm Password is required</li>
+            </ul>
+        </div>
+
         <form name="form" ng-submit="model.register(model.user)" novalidate>
             <input name="username" ng-model="model.user.username"
                     type="text"
@@ -35,7 +44,7 @@
                     <button type="submit"  class="btn btn-primary btn-block">Register</button>
             </div>
             <a class="btn btn-danger  btn-block"
-               href="model.logout()">Cancel</a>
+               href="#/login">Cancel</a>
         </form>
     </div>
 
