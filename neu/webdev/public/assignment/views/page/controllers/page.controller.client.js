@@ -41,16 +41,18 @@
         init();
 
         function createPage() {
-            PageService
-                .createPage(vm.websiteId, vm.page)
-                .then(function (page) {
-                    vm.page = page.data;
-                    WebsiteService
-                        .updatePage(vm.page._website, vm.page._id)
-                        .then(function (website) {
-                            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
-                        })
-                });
+         if(vm.page && vm.page.name) {
+             PageService
+                 .createPage(vm.websiteId, vm.page)
+                 .then(function (page) {
+                     vm.page = page.data;
+                     WebsiteService
+                         .updatePage(vm.page._website, vm.page._id)
+                         .then(function (website) {
+                             $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                         })
+                 });
+         }
         }
     }
 
