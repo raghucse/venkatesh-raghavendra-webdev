@@ -1,52 +1,52 @@
 <body>
-    <div class="container">
-        <h1>Register</h1>
-        <div ng-show="model.error" class="alert alert-danger">
-            {{model.error}}
-        </div>
+<div class="container">
+    <h1>Register</h1>
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
 
-        <div ng-show="model.message" class="alert alert-info">
-            {{model.message}}
-        </div>
-        <div ng-show="form.$invalid && form.$submitted" class="alert alert-danger">
-            Please fix below errors
-            <ul>
-                <li ng-show="form.username.$invalid && form.$submitted">Username is required</li>
-                <li ng-show="form.password.$invalid && form.$submitted">Password is required</li>
-                <li ng-show="form.verifypassword.$invalid && form.$submitted">Confirm Password is required</li>
-            </ul>
-        </div>
+    <div ng-show="model.message" class="alert alert-info">
+        {{model.message}}
+    </div>
+    <div ng-show="form.$invalid && form.$submitted" class="alert alert-danger">
+        Please fix below errors
+        <ul>
+            <li ng-show="form.username.$invalid && form.$submitted">Username is required</li>
+            <li ng-show="form.password.$invalid && form.$submitted">Password is required</li>
+            <li ng-show="form.verifypassword.$invalid && form.$submitted">Confirm Password is required</li>
+        </ul>
+    </div>
 
-        <form name="form" ng-submit="model.register(model.user)" novalidate>
-            <input name="username" ng-model="model.user.username"
-                    type="text"
-                   class="form-control"
-                   placeholder="username" required/>
-            <div class="error" ng-show="form.username.$invalid && form.$submitted">
-                Username is required
+    <form name="form" ng-submit="model.register(model.user)" novalidate>
+        <input name="username" ng-model="model.user.username"
+               type="text"
+               class="form-control"
+               placeholder="username" required/>
+        <div class="error" ng-show="form.username.$invalid && form.$submitted">
+            Username is required
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <input  name="password" ng-model="model.user.password" type="password"  class="form-control" id="inputPassword" placeholder="Password" required>
+            </div>
+            <div class="error" ng-show="form.password.$invalid && form.$submitted">
+                Password is required
             </div>
             <div class="form-group">
-                    <div class="form-group">
-                        <input  name="password" ng-model="model.user.password" type="password"  class="form-control" id="inputPassword" placeholder="Password" required>
-                    </div>
-                    <div class="error" ng-show="form.password.$invalid && form.$submitted">
-                        Password is required
-                    </div>
-                    <div class="form-group">
-                        <input  name="verifypassword" ng-model="model.user.verifypassword" type="password"  class="form-control"  placeholder="Confirm Password" required>
-                    </div>
-                    <div class="error" ng-show="form.verifypassword.$invalid && form.$submitted">
-                        Confirm Password is required
-                    </div>
-                    <div ng-show="model.passwordError" class="alert alert-danger">
-                        {{model.passwordError}}
-                    </div>
-                    <button type="submit"  class="btn btn-primary btn-block">Register</button>
+                <input  name="verifypassword" ng-model="model.user.verifypassword" type="password"  class="form-control"  placeholder="Confirm Password" required>
             </div>
-            <a class="btn btn-danger  btn-block"
-               href="#/login">Cancel</a>
-        </form>
-    </div>
+            <div class="error" ng-show="form.verifypassword.$invalid && form.$submitted">
+                Confirm Password is required
+            </div>
+            <div ng-show="model.passwordError" class="alert alert-danger">
+                {{model.passwordError}}
+            </div>
+            <button type="submit"  class="btn btn-primary btn-block">Register</button>
+        </div>
+        <a class="btn btn-danger  btn-block"
+           href="#/login">Cancel</a>
+    </form>
+</div>
 
 
 
