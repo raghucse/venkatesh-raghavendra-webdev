@@ -70,32 +70,32 @@
     </div>
 
 
-        <div class="col-sm-8 col-xs-12 wbdv-right-pane">
-            <div ng-show="form.$invalid && form.$submitted" class="alert alert-danger">
-                Please fix below errors
-                <ul>
-                    <li ng-show="form.name.$invalid && form.$submitted">Website name is required</li>
-                </ul>
-            </div>
-            <div class="top-padding">
-                <form name="form" novalidate>
-                    <label for="new-web-name" class="form-control-label">Website Name</label>
-                    <input name="name" ng-model="model.website.name"
-                           type="text"
-                           id="new-web-name"
-                           class="form-control"
-                           placeholder="Web Sitename" required/>
-                    <div class="error" ng-show="form.name.$invalid && form.$submitted">
-                     Webdite Name is required
-                    </div>
-                </form>
-            </div>
-            <div class="form-group">
-                <label for="new-web-description" class="form-control-label">Website Description</label>
-                <textarea ng-model="model.website.description" placeholder="Website Description" id="new-web-description" class="form-control" rows="4" cols="100">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</textarea>
-            </div>
-            <a ng-click="model.deleteWebsite()" class="btn btn-danger form-control">Delete</a>
+    <div class="col-sm-8 col-xs-12 wbdv-right-pane">
+        <div ng-show="form.$invalid && form.$submitted" class="alert alert-danger">
+            Please fix below errors
+            <ul>
+                <li ng-show="form.name.$invalid && form.$submitted">Website name is required</li>
+            </ul>
         </div>
+        <div class="top-padding">
+            <form name="form" novalidate>
+                <label for="new-web-name" class="form-control-label">Website Name</label>
+                <input name="name" ng-model="model.website.name"
+                       type="text"
+                       id="new-web-name"
+                       class="form-control"
+                       placeholder="Web Sitename" required/>
+                <div class="error" ng-show="form.name.$invalid && form.$submitted">
+                    Webdite Name is required
+                </div>
+            </form>
+        </div>
+        <div class="form-group">
+            <label for="new-web-description" class="form-control-label">Website Description</label>
+            <textarea ng-model="model.website.description" placeholder="Website Description" id="new-web-description" class="form-control" rows="4" cols="100">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</textarea>
+        </div>
+        <a ng-click="model.deleteWebsite()" class="btn btn-danger form-control">Delete</a>
+    </div>
 
 </div>
 
