@@ -155,11 +155,16 @@
         }
 
         function updateWid(widget) {
-            WidgetService
-                .updateWidget(vm.widgetId, widget)
-                .then(function () {
-                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
-                });
+            if(vm.widget.name) {
+                WidgetService
+                    .updateWidget(vm.widgetId, widget)
+                    .then(function () {
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                    });
+            }
+            else{
+                vm.nameError = "Widget Name is required";
+            }
         }
 
         function deleteWidget() {
